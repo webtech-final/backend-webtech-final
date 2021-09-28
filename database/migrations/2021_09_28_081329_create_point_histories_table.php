@@ -16,8 +16,8 @@ class CreatePointHistoriesTable extends Migration
         Schema::create('point_histories', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(\App\Models\User::class);
-            $table->bigInteger('score');
-            $table->enum('mode',['single','versus']);
+            $table->bigInteger('point');
+            $table->enum('type',['get','use']);
             $table->timestamps();
         });
     }

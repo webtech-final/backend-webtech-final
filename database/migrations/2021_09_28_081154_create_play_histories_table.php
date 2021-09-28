@@ -15,6 +15,9 @@ class CreatePlayHistoriesTable extends Migration
     {
         Schema::create('play_histories', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(\App\Models\User::class);
+            $table->bigInteger('score');
+            $table->enum('mode',['single','versus']);
             $table->timestamps();
         });
     }

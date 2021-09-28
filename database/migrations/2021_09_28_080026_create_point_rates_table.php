@@ -15,9 +15,7 @@ class CreatePointRatesTable extends Migration
     {
         Schema::create('point_rates', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\User::class);
-            $table->bigInteger('point');
-            $table->enum('type',['get','use']);
+            $table->bigInteger('rate');
             $table->timestamps();
         });
     }
