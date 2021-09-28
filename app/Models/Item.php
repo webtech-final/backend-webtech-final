@@ -10,4 +10,7 @@ class Item extends Model
 {
     use HasFactory,SoftDeletes;
 
+    public function users(){
+        return $this->belongsTo(User::class);
+    }
 }

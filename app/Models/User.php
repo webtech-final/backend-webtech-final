@@ -23,6 +23,10 @@ class User extends Authenticatable
         'password',
     ];
 
+    protected $attributes = [
+        'point' => 0
+    ];
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -33,6 +37,17 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public function pointHistories(){
+        return $this->hasMany(PointHistory::class);
+    }
+
+    public function playHistories(){
+        return $this->hasMany(PlayHistory::class);
+    }
+
+    public function items(){
+        return $this->belongsTo(Item::class);
+    }
     /**
      * The attributes that should be cast.
      *

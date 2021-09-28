@@ -22,8 +22,8 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->enum('role',['admin','user']);
             $table->integer('point');
-            $table->foreignIdFor(\App\Models\PlayHistory::class);
-            $table->foreignIdFor(\App\Models\PointHistory::class);
+            $table->foreignIdFor(\App\Models\PlayHistory::class)->nullable();
+            $table->foreignIdFor(\App\Models\PointHistory::class)->nullable();g
             $table->timestamps();
         });
     }
