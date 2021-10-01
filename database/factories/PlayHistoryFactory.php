@@ -22,7 +22,9 @@ class PlayHistoryFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'user_id' => 1,
+            'score' => $this->faker->numberBetween(0,2000000),
+            'mode' => $this->faker->randomElement(['single','versus'])
         ];
     }
 }

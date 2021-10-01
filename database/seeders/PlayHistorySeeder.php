@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\PlayHistory;
 use Illuminate\Database\Seeder;
 
 class PlayHistorySeeder extends Seeder
@@ -13,6 +14,6 @@ class PlayHistorySeeder extends Seeder
      */
     public function run()
     {
-        //
+        PlayHistory::factory()->count(30)->create();
     }
 }
