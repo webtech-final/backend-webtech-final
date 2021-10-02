@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\PointHistory;
 use App\Models\PointRate;
 use Illuminate\Database\Seeder;
 
@@ -18,5 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(PlayHistorySeeder::class);
         $this->call(PointRate::class);
+        $this->call(PointHistory::class);
     }
 }

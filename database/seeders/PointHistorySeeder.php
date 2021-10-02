@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\PointHistory;
 use Illuminate\Database\Seeder;
 
 class PointHistorySeeder extends Seeder
@@ -13,6 +14,6 @@ class PointHistorySeeder extends Seeder
      */
     public function run()
     {
-        //
+        PointHistory::factory()->count(30)->create();
     }
 }

@@ -22,7 +22,9 @@ class PointHistoryFactory extends Factory
     public function definition()
     {
         return [
-            //
+            "point" => $this->faker->numberBetween(3,100),
+            "user_id"=> 1,
+            "type" => $this->faker->randomElement(["use","get"])
         ];
     }
 }
