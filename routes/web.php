@@ -20,4 +20,4 @@ Route::get('/', function () {
 
 Route::resource('textures', \App\Http\Controllers\TextureController::class);
 
-Route::post('/upload', [\App\Http\Controllers\UploadController::class, 'upload'])->name('upload');
+// Route::post('/upload', [\App\Http\Controllers\UploadController::class, 'upload'])->name('upload');

@@ -3,8 +3,8 @@
     <div class="text-6xl font-serif">
         Add New Texture
     </div>
-    <!-- <form action="{{ route('textures.store') }} "> -->
-    <form method="post" action="{{ route('upload') }}" enctype="multipart/form-data">
+    <form action="{{ route('textures.store') }} " method="post" enctype="multipart/form-data">
+        {{-- <form method="post" action="{{ route('upload') }}" enctype="multipart/form-data"> --}}
         @csrf
         <div>
             <label for="name">Name</label>

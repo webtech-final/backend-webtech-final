@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Texture;
 use Illuminate\Http\Request;
+use App\Http\Controllers\UploadController;
 
 class TextureController extends Controller
 {
@@ -40,8 +41,10 @@ class TextureController extends Controller
         $texture->name = $request->input('name');
 
         // call upload API 
+        $response = new UploadController();
+        $response = $response->upload($request);
 
-        $texture->uri = $request->input('uri');
+        $texture->uri = $response->getData()->data;
         $texture->save();
 
         return redirect()->route('textures.index');
