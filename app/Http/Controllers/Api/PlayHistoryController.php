@@ -55,6 +55,8 @@ class PlayHistoryController extends Controller
         $playHistory->score = $request->input('score');
         $playHistory->mode = $request->input('mode');
         $playHistory->user_id = $request->input('user_id');
+        $playHistory->opponent = $request->input('opponent');
+        $playHistory->result = $request->input("result");
         $playHistory->save();
         return $playHistory;
     }
