@@ -27,3 +27,6 @@ Route::apiResource('playHistories', \App\Http\Controllers\Api\PlayHistoryControl
 Route::get('pointHistories/use',[\App\Http\Controllers\Api\PointHistoryController::class,'use_index']);
 Route::get('pointHistories/get',[\App\Http\Controllers\Api\PointHistoryController::class,'get_index']);
 Route::apiResource('pointHistories',\App\Http\Controllers\Api\PointHistoryController::class);
+
+Route::get('pointRate/last',[\App\Http\Controllers\Api\PointRateController::class,'lastRate']);
+Route::apiResource('pointRates',\App\Http\Controllers\Api\PointRateController::class);
