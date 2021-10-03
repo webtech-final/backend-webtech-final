@@ -28,7 +28,8 @@ class User extends Authenticatable implements JWTSubject
     ];
 
     protected $attributes = [
-        'point' => 0
+        'point' => 0,
+        'role' => 'user'
     ];
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\PointHistory;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -80,7 +81,9 @@ class AuthController extends Controller
      */
     public function me(Request $request)
     {
-        $user = JWTAuth::user();
+        // $user = JWTAuth::user()->pointHistories;
+        $user = JWTAuth::user()->with(['pointHistories', "playHistories"])->get();
+
         return response()->json($user);
     }
 
