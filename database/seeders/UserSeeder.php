@@ -20,5 +20,7 @@ class UserSeeder extends Seeder
         $user->password = "Aui2488";
         $user->role = "user";
         $user->save();
+
+        User::factory()->count(9)->create();
     }
 }

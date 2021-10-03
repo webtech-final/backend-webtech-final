@@ -22,7 +22,7 @@ class PointRateFactory extends Factory
     public function definition()
     {
         return [
-            "rate" => $this->faker->numberBetween(0,1000)
+            "rate" => $this->faker->numberBetween(0, 1000)
         ];
     }
 }

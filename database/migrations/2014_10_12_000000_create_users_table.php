@@ -20,10 +20,10 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->enum('role',['admin','user']);
+            $table->enum('role', ['user', 'admin']);
             $table->integer('point');
-//            $table->foreignIdFor(\App\Models\PlayHistory::class)->nullable();
-//            $table->foreignIdFor(\App\Models\PointHistory::class)->nullable();g
+            //table->foreignIdFor(\App\Models\PlayHistory::class)->nullable();
+            //table->foreignIdFor(\App\Models\PointHistory::class)->nullable();
             $table->timestamps();
         });
     }
