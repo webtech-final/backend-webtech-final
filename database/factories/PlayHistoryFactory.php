@@ -24,9 +24,11 @@ class PlayHistoryFactory extends Factory
     {
         $user_id = User::all()->random()->id;
         return [
-            'user_id' => $user_id,
-            'score' => $this->faker->numberBetween(0, 5000),
-            'mode' => $this->faker->randomElement(['single', 'versus'])
+            'user_id' => 1,
+            'score' => $this->faker->numberBetween(0,3000),
+            'mode' => $this->faker->randomElement(['single','versus']),
+            'opponent' => $this->faker->firstName,
+            'result' => $this->faker->randomElement(['WIN','LOSE'])
         ];
     }
 }
