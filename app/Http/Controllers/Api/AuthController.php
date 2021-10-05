@@ -108,6 +108,13 @@ class AuthController extends Controller
         return $this->respondWithToken(auth()->refresh());
     }
 
+    public function getPoint(Request $request, $id)
+    {
+        $point = $request->point;
+        $user = User::findOrFail($id);
+        $user->point = $user->point + $point;
+        $user->save();
+    }
     /**
      * Get the token array structure.
      *

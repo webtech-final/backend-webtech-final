@@ -40,6 +40,7 @@ Route::group([
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::post('register', [AuthController::class, 'register']);
     Route::post('me', [AuthController::class, 'me']);
+    Route::put('getPoint/{id}',[AuthController::class,'getPoint']);
 });
 Route::get('pointRate/last',[\App\Http\Controllers\Api\PointRateController::class,'lastRate']);
 Route::apiResource('pointRates',\App\Http\Controllers\Api\PointRateController::class);
