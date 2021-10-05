@@ -18,7 +18,7 @@ class CreatePlayHistoriesTable extends Migration
             $table->foreignIdFor(\App\Models\User::class);
             $table->bigInteger('score');
             $table->enum('mode',['single','versus']);
-            $table->string("opponent",255);
+            $table->string("opponent",255)->nullable();
             $table->enum("result",['WIN','LOSE']);
             $table->timestamps();
         });
