@@ -10,8 +10,7 @@
         @foreach ($textures as $item)
             <div class="bg-gray-200 text-center py-2">
                 {{ $item->name }}
-                <img src=" {{ $item->uri }} " alt=""> </img>
-
+                <img src=" {{ $item->uri }} " alt=""/> 
                 <a href=" {{ route('textures.edit', ['texture' => $item->id]) }} "> Edit</a>
             </div>
         @endforeach

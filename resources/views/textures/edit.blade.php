@@ -11,8 +11,10 @@
             <input type="text" name="name" placeholder="name" value="{{ old('name', $texture->name) }} ">
 
         </div>
-        <div>
+        <div class="flex">
             <label for="image">Image</label>
+            <label for="dd">{{ $texture->uri }} </label>
+            <img src="{{ $texture->uri }} " alt="">
             <input type="file" name="image" class="w-full">
         </div>
         <div>
