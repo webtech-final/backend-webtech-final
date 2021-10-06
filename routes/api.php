@@ -44,3 +44,4 @@ Route::group([
 });
 Route::get('pointRate/last',[\App\Http\Controllers\Api\PointRateController::class,'lastRate']);
 Route::apiResource('pointRates',\App\Http\Controllers\Api\PointRateController::class);
+

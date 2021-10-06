@@ -15,9 +15,11 @@ class CreateItemDetailsTable extends Migration
     {
         Schema::create('item_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\Item::class);
+            $table->unsignedBigInteger('item_id');
+            $table->string('name');
             $table->string('image_path');
             $table->timestamps();
+            $table->foreign('item_id')->references('id')->on('items');
         });
     }
 

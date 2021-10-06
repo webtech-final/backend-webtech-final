@@ -15,19 +15,15 @@ class ItemSeeder extends Seeder
     public function run()
     {
         $item = new Item();
-        $item->name =  "default";
+        $item->name =  "Default";
         $item->type =  "block";
         $item->point =  0;
-        $item->amount =  0;
-        $item->equipped =  true;
         $item->save();
 
         $item = new Item();
-        $item->name =  "default";
+        $item->name =  "Default";
         $item->type =  "background";
         $item->point =  0;
-        $item->amount =  0;
-        $item->equipped =  true;
         $item->save();
     }
 }

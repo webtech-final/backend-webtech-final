@@ -17,9 +17,7 @@ class CreateItemsTable extends Migration
             $table->id();
             $table->string('name');
             $table->enum('type', ['block', 'background']);
-            $table->integer('point');
-            $table->integer('amount')->default(1);
-            $table->boolean('equipped')->default(false);
+            $table->bigInteger('point');
             $table->timestamps();
             $table->softDeletes();
         });
