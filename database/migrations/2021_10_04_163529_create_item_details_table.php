@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateItemsTable extends Migration
+class CreateItemDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,11 @@ class CreateItemsTable extends Migration
      */
     public function up()
     {
-        Schema::create('items', function (Blueprint $table) {
+        Schema::create('item_details', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->enum('type', ['block', 'background']);
-            $table->integer('point');
-            $table->integer('amount')->default(1);
-            $table->boolean('equipped')->default(false);
+            $table->foreignIdFor(\App\Models\Item::class);
+            $table->string('image_path');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -32,6 +28,6 @@ class CreateItemsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('items');
+        Schema::dropIfExists('item_details');
     }
 }
