@@ -17,8 +17,10 @@ class UserSeeder extends Seeder
         $user = new User();
         $user->name =  "AUI2488";
         $user->email = "aui2488@aui.com";
-        $user->password = "Aui2488";
+        $user->password = bcrypt("Aui2488");
         $user->role = "user";
         $user->save();
+
+        User::factory()->count(9)->create();
     }
 }

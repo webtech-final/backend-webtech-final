@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\PointRate;
 use Illuminate\Database\Seeder;
 
 class PointRateSeeder extends Seeder
@@ -13,6 +14,6 @@ class PointRateSeeder extends Seeder
      */
     public function run()
     {
-        //
+        PointRate::factory()->count(10)->create();
     }
 }

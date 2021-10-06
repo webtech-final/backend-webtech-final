@@ -9,6 +9,11 @@ class PlayHistory extends Model
 {
     use HasFactory;
 
+    protected  $attributes = [
+        'opponent' => "",
+        'result' => 'WIN'
+    ];
+
     public function user(){
         return $this->belongsTo(User::class);
     }

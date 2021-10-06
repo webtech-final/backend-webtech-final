@@ -37,6 +37,7 @@ DB_PASSWORD= {your database password }
 
 ```bash
 php artisan key:generate
+php artisan jwt:secret
 ```
 
 ## 5.5 Create database with same name as DB_DATABASE in .env

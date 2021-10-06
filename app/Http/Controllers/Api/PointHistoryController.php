@@ -13,6 +13,14 @@ class PointHistoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth:api', [
+            'only' => ['store']
+        ]);
+    }
+
     public function index()
     {
         $pointHistories = PointHistory::get();

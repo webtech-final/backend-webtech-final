@@ -13,6 +13,14 @@ class PlayHistoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth:api', [
+            'only' => ['store']
+        ]);
+    }
+
     public function index()
     {
         $playHistories = PlayHistory::get();
@@ -33,13 +41,13 @@ class PlayHistoryController extends Controller
 
     public function top10_single_index()
     {
-        $playHistories = PlayHistory::with('user')->where('mode','single')->orderby('score','DESC')->limit(10)->get();
+        $playHistories = PlayHistory::with('user')->where('mode', 'single')->orderby('score', 'DESC')->limit(10)->get();
         return $playHistories;
     }
 
     public function top10_versus_index()
     {
-        $playHistories = PlayHistory::with('user')->where('mode','versus')->orderby('score','DESC')->limit(10)->get();
+        $playHistories = PlayHistory::with('user')->where('mode', 'versus')->orderby('score', 'DESC')->limit(10)->get();
         return $playHistories;
     }
 
@@ -55,6 +63,8 @@ class PlayHistoryController extends Controller
         $playHistory->score = $request->input('score');
         $playHistory->mode = $request->input('mode');
         $playHistory->user_id = $request->input('user_id');
+        $playHistory->opponent = $request->input('opponent');
+        $playHistory->result = $request->input("result");
         $playHistory->save();
         return $playHistory;
     }

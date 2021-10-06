@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\PointHistory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PointHistoryFactory extends Factory
@@ -21,8 +22,11 @@ class PointHistoryFactory extends Factory
      */
     public function definition()
     {
+        $user_id = User::all()->random()->id;
         return [
-            //
+            "user_id" => $user_id,
+            "point" => $this->faker->numberBetween(3, 100),
+            "type" => $this->faker->randomElement(["use", "get"])
         ];
     }
 }
