@@ -54,7 +54,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function items()
     {
-        return $this->belongsTo(Item::class);
+        return $this->hasMany(Item::class);
     }
     /**
      * The attributes that should be cast.

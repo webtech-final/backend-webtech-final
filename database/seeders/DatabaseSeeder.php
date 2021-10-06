@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PlayHistorySeeder::class);
         $this->call(PointRateSeeder::class);
         $this->call(PointHistorySeeder::class);
+        $this->call(ItemSeeder::class);
     }
 }
