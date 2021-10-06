@@ -18,10 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-<<<<<<< HEAD
 
-=======
->>>>>>> develop
 Route::get('playHistories/single', [\App\Http\Controllers\Api\PlayHistoryController::class, 'single_index']);
 Route::get('playHistories/single/top10', [\App\Http\Controllers\Api\PlayHistoryController::class, 'top10_single_index']);
 Route::get('playHistories/versus', [\App\Http\Controllers\Api\PlayHistoryController::class, 'versus_index']);
@@ -32,10 +29,8 @@ Route::get('pointHistories/use', [\App\Http\Controllers\Api\PointHistoryControll
 Route::get('pointHistories/get', [\App\Http\Controllers\Api\PointHistoryController::class, 'get_index']);
 Route::apiResource('pointHistories', \App\Http\Controllers\Api\PointHistoryController::class);
 
-<<<<<<< HEAD
 
 Route::post('/upload', [\App\Http\Controllers\UploadController::class, 'upload'])->name('upload');
-=======
 Route::group([
 
     'middleware' => 'api',
@@ -48,8 +43,7 @@ Route::group([
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::post('register', [AuthController::class, 'register']);
     Route::post('me', [AuthController::class, 'me']);
-    Route::put('getPoint/{id}',[AuthController::class,'getPoint']);
+    Route::put('getPoint/{id}', [AuthController::class, 'getPoint']);
 });
-Route::get('pointRate/last',[\App\Http\Controllers\Api\PointRateController::class,'lastRate']);
-Route::apiResource('pointRates',\App\Http\Controllers\Api\PointRateController::class);
->>>>>>> develop
+Route::get('pointRate/last', [\App\Http\Controllers\Api\PointRateController::class, 'lastRate']);
+Route::apiResource('pointRates', \App\Http\Controllers\Api\PointRateController::class);
