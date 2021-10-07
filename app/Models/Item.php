@@ -10,8 +10,9 @@ class Item extends Model
 {
     use HasFactory,SoftDeletes;
 
-    public function user(){
-        return $this->belongsTo(User::class);
+    public function users(){
+        return $this->belongsToMany(User::class,'item_user', 'item_id', 'user_id')->withTimestamps();
+
     }
     public function itemDetails()
     {

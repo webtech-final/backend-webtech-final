@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Item;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
@@ -18,7 +19,55 @@ class ItemController extends Controller
         $items = Item::get();
         return $items;
     }
+    
+    public function inventory_block($id)
+    {
+        $items = Item::whereHas('users', function ($q) use($id){
+            $q->where('user_id', $id);
+        })->where('type','block')->get();
+        return $items;
+    }
+    public function inventory_background($id)
+    {
+        
+        $items = Item::whereHas('users', function ($q) use ($id) {
+            $q->where('user_id', $id);
+        })->where('type', 'background')->get();
+        return $items;
+    }
+    public function shop_block($id)
+    {
+        
+        $items = Item::where('id', '>', 2)->where('type', 'block');
+        $haveitems = Item::whereHas('users', function ($q) use ($id) {
+            $q->where('user_id', $id);
+        })->where('type', 'block');
+        foreach($items as $key => $item){
+            foreach($haveitems as $haveitem){
+                if($item === $haveitem){
+                    unset($items[$key]);
+                }
+            }
+        }
 
+        return $items;
+    }
+    public function shop_background($id)
+    {
+        
+        $items = Item::where('id', '>', 2)->where('type', 'background');
+        $haveitems = Item::whereHas('users', function ($q) use ($id) {
+            $q->where('user_id', $id);
+        })->where('type', 'background');
+        foreach ($items as $key => $item) {
+            foreach ($haveitems as $haveitem) {
+                if ($item === $haveitem) {
+                    unset($items[$key]);
+                }
+            }
+        }
+        return $items;
+    }
    
 
     /**
@@ -33,8 +82,6 @@ class ItemController extends Controller
         $item->name = $request->input('name');
         $item->type = $request->input('type');
         $item->point = $request->input('point');
-        $item->amount = $request->input('amount');
-        $item->equipped = $request->input('equipped');
         $item->save();
         return $item;
     }

@@ -45,3 +45,8 @@ Route::group([
 Route::get('pointRate/last',[\App\Http\Controllers\Api\PointRateController::class,'lastRate']);
 Route::apiResource('pointRates',\App\Http\Controllers\Api\PointRateController::class);
 
+Route::get('items/block/inventory/{id}', [\App\Http\Controllers\Api\ItemController::class, 'inventory_block']);
+Route::get('items/background/inventory/{id}', [\App\Http\Controllers\Api\ItemController::class, 'inventory_background']);
+Route::get('items/block/shop/{id}', [\App\Http\Controllers\Api\ItemController::class, 'shop_block']);
+Route::get('items/background/shop/{id}', [\App\Http\Controllers\Api\ItemController::class, 'shop_background']);
+Route::apiResource('items', \App\Http\Controllers\Api\ItemController::class);
