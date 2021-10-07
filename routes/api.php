@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('playHistories/singleplayer/{id}', [\App\Http\Controllers\Api\PlayHistoryController::class, 'single_log']);
+Route::get('playHistories/versusplayer/{id}', [\App\Http\Controllers\Api\PlayHistoryController::class, 'versus_log']);
 Route::get('playHistories/single', [\App\Http\Controllers\Api\PlayHistoryController::class, 'single_index']);
 Route::get('playHistories/single/top10', [\App\Http\Controllers\Api\PlayHistoryController::class, 'top10_single_index']);
 Route::get('playHistories/versus', [\App\Http\Controllers\Api\PlayHistoryController::class, 'versus_index']);

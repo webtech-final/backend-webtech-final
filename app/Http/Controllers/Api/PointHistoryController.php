@@ -29,7 +29,7 @@ class PointHistoryController extends Controller
 
     public function point_log($id)
     {
-        $pointHistories = PointHistory::with('user')->where('user_id', $id)->get();
+        $pointHistories = PointHistory::where('user_id', $id)->orderby('created_at', 'DESC')->get();
         return $pointHistories;
     }
 
