@@ -27,6 +27,12 @@ class PointHistoryController extends Controller
         return $pointHistories;
     }
 
+    public function point_log($id)
+    {
+        $pointHistories = PointHistory::with('user')->where('user_id', $id)->get();
+        return $pointHistories;
+    }
+
     public function use_index()
     {
         $pointHistories = PointHistory::with('user')->where('type', 'use')->get();
