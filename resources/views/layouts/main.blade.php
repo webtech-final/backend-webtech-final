@@ -20,10 +20,13 @@
                 Management</a>
             <a href="/rate" class="py-2 px-5 text-white rounded-full hover:bg-gray-700 text-xl">Point Rate</a>
             @if (Auth::check())
-                <a href="/rate"
-                    class="justify-self-end py-2 px-5 text-white rounded-full hover:bg-gray-700 text-xl">Logout</a>
+                <form action="{{ route('logout') }}" method="post" class="inline-block">
+                    @csrf
+                    <button class="justify-self-end py-2 px-5 text-white rounded-full hover:bg-gray-700 text-xl">Logout
+                    </button>
+                </form>
             @else
-                <a href="/rate"
+                <a href="{{ route('login') }}"
                     class="justify-self-end py-2 px-5 text-white rounded-full hover:bg-gray-700 text-xl">Login</a>
             @endif
 
