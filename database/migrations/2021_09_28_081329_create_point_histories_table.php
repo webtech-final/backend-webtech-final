@@ -15,10 +15,11 @@ class CreatePointHistoriesTable extends Migration
     {
         Schema::create('point_histories', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\User::class);
+            $table->unsignedBigInteger('user_id');
             $table->bigInteger('point');
             $table->enum('type',['get','use']);
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

@@ -54,7 +54,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function items()
     {
-        return $this->hasMany(Item::class);
+        return $this->belongsToMany(Item::class, 'item_user', 'user_id', 'item_id')->withTimestamps();
     }
     /**
      * The attributes that should be cast.

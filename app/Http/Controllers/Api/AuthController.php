@@ -42,7 +42,10 @@ class AuthController extends Controller
         if (!$token = JWTAuth::attempt($validator->validated())) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-
+        $user = auth()->user();
+        if($user->role==="admin"){
+            return $user->role;
+        }
         return $this->respondWithToken($token);
     }
 
@@ -60,14 +63,19 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors()->toJson(), 400);
+            return response()->json($validator->errors(), 400);
         }
 
         $user = User::create(array_merge(
             $validator->validated(),
             ['password' => bcrypt($request->password)]
         ));
-
+        
+        $user->items()->attach([
+            1 => ['equipped' => true],
+            2 => ['equipped' => true],
+        ]);
+        
         return response()->json([
             'message' => 'User successfully registered',
             'user' => $user
