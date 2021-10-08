@@ -123,6 +123,13 @@ class AuthController extends Controller
         $user->point = $user->point + $point;
         $user->save();
     }
+    public function usePoint(Request $request, $id)
+    {
+        $point = $request->point;
+        $user = User::findOrFail($id);
+        $user->point = $user->point - $point;
+        $user->save();
+    }
     /**
      * Get the token array structure.
      *
