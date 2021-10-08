@@ -122,6 +122,7 @@ class AuthController extends Controller
         $user = User::findOrFail($id);
         $user->point = $user->point + $point;
         $user->save();
+        return $user->point;
     }
     public function usePoint(Request $request, $id)
     {

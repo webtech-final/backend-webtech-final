@@ -27,6 +27,18 @@ class PlayHistoryController extends Controller
         return $playHistories;
     }
 
+    public function single_log($id)
+    {
+        $playHistories = PlayHistory::where('user_id', $id)->where('mode', 'single')->orderby('created_at', 'DESC')->get();
+        return $playHistories;
+    }
+
+    public function versus_log($id)
+    {
+        $playHistories = PlayHistory::where('user_id', $id)->where('mode', 'versus')->orderby('created_at', 'DESC')->get();
+        return $playHistories;
+    }
+
     public function single_index()
     {
         $playHistories = PlayHistory::with('user')->where('mode', 'single')->get();
