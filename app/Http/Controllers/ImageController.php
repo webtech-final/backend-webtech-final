@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Item;
+use App\Models\Image;
 use Illuminate\Http\Request;
 
-class ItemController extends Controller
+class ImageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,6 @@ class ItemController extends Controller
     public function index()
     {
         //
-        $item = Item::orderBy('id')->get();
-        return view('items.index', ['items' => $item]);
     }
 
     /**
@@ -27,7 +25,6 @@ class ItemController extends Controller
     public function create()
     {
         //
-        return view('items.create');
     }
 
     /**
@@ -39,26 +36,15 @@ class ItemController extends Controller
     public function store(Request $request)
     {
         //
-        $item = new Item();
-        $item->name = $request->input('name');
-
-        // call upload API 
-        $response = new UploadController();
-        $response = $response->upload($request);
-
-        $item->uri = $response->getData()->data;
-        $item->save();
-
-        return redirect()->route('items.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Item  $item
+     * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function show(Item $item)
+    public function show(Image $image)
     {
         //
     }
@@ -66,23 +52,22 @@ class ItemController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Item  $item
+     * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Image $image)
     {
-        $item = Item::findOrFail($id);
-        return view('items.edit', ['item' => $item]);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Item  $item
+     * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Item $item)
+    public function update(Request $request, Image $image)
     {
         //
     }
@@ -90,10 +75,10 @@ class ItemController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Item  $item
+     * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Item $item)
+    public function destroy(Image $image)
     {
         //
     }

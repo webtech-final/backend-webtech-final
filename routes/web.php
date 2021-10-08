@@ -18,6 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('textures', \App\Http\Controllers\TextureController::class);
+Route::resource('items', \App\Http\Controllers\ItemController::class);
 
 // Route::post('/upload', [\App\Http\Controllers\UploadController::class, 'upload'])->name('upload');

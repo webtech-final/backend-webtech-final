@@ -16,7 +16,7 @@
         <div>
             <a href="/" class="py-2 px-5 text-white rounded-full hover:bg-gray-700 text-xl
              ">Home</a>
-            <a href="/textures" class="py-2 px-5 text-white rounded-full hover:bg-gray-700 text-xl">Texture
+            <a href="/items" class="py-2 px-5 text-white rounded-full hover:bg-gray-700 text-xl">Texture
                 Management</a>
         </div>
     </div>
