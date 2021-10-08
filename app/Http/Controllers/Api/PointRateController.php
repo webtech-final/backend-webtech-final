@@ -15,7 +15,6 @@ class PointRateController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**

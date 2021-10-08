@@ -48,7 +48,7 @@ Route::group([
     Route::post('me', [AuthController::class, 'me']);
     Route::put('getPoint/{id}', [AuthController::class, 'getPoint']);
 });
-Route::get('pointRate/last', [\App\Http\Controllers\Api\PointRateController::class, 'lastRate']);
+Route::get('pointRate/last', [\App\Http\Controllers\Api\PointRateController::class, 'lastRate'])->name('rate.last');
 Route::apiResource('pointRates', \App\Http\Controllers\Api\PointRateController::class);
 
 Route::get('items/block/inventory/{id}', [\App\Http\Controllers\Api\ItemController::class, 'inventory_block']);

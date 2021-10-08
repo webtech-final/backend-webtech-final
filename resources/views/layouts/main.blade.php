@@ -16,14 +16,15 @@
         <div>
             <a href="/" class="py-2 px-5 text-white rounded-full hover:bg-gray-700 text-xl
              ">Home</a>
-            <a href="/items" class="py-2 px-5 text-white rounded-full hover:bg-gray-700 text-xl">Texture
+            <a href="/items" class="py-2 px-5 text-white rounded-full hover:bg-gray-700 text-xl">Item
                 Management</a>
+            <a href="/rate" class="py-2 px-5 text-white rounded-full hover:bg-gray-700 text-xl">Point Rate</a>
         </div>
     </div>
     <div class="container mx-auto min-h-screen">
         @yield('content')
     </div>
-    <div class="bg-gray-800 h-20">FOOTER</div>
+    <div class="bg-gray-800 h-10"></div>
 </body>
 
 </html>
