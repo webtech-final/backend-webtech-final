@@ -22,6 +22,10 @@ class AuthController extends Controller
         $this->middleware('auth:api', [
             'except' => ['login', 'register']
         ]);
+
+        $this->middleware('auth:web', [
+            'except' => ['login', 'register']
+        ]);
     }
 
     /**
@@ -44,8 +48,8 @@ class AuthController extends Controller
             return response()->json(['error' => 'Unauthorized'], 401);
         }
         $user = auth()->user();
-        if($user->role==="admin"){
-            return $user->role;
+        if ($user->role === "admin") {
+            return redirect()->route('rate.index');
         }
         return $this->respondWithToken($token);
     }
@@ -71,12 +75,12 @@ class AuthController extends Controller
             $validator->validated(),
             ['password' => bcrypt($request->password)]
         ));
-        
+
         $user->items()->attach([
             1 => ['equipped' => true],
             2 => ['equipped' => true],
         ]);
-        
+
         return response()->json([
             'message' => 'User successfully registered',
             'user' => $user
@@ -142,7 +146,8 @@ class AuthController extends Controller
         ]);
     }
 
-    public function uploadProfile(Request $req) {
+    public function uploadProfile(Request $req)
+    {
 
         $validator = Validator::make($req->all(), [
             'id' => 'required',
@@ -151,7 +156,7 @@ class AuthController extends Controller
 
         if ($validator->fails()) {
 
-            return response()->json(["status" => 'fail',"error" => $validator->errors()], 400);
+            return response()->json(["status" => 'fail', "error" => $validator->errors()], 400);
         }
 
         $upload = new UploadController();

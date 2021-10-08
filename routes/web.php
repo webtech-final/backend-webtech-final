@@ -1,9 +1,5 @@
 <?php
 
-use App\Http\Controllers\PointRateController;
-use App\Models\PointRate;
-use App\Models\Texture;
-use Facade\FlareClient\Api;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,8 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('items', \App\Http\Controllers\ItemController::class);
-Route::resource('images', \App\Http\Controllers\ImageController::class);
-Route::get('/rate/change', [PointRateController::class, 'change'])->name('rate.change');
-Route::resource('rate', PointRateController::class);
-// Route::post('/upload', [\App\Http\Controllers\UploadController::class, 'upload'])->name('upload');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';

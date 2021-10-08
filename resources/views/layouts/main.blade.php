@@ -19,6 +19,14 @@
             <a href="/items" class="py-2 px-5 text-white rounded-full hover:bg-gray-700 text-xl">Item
                 Management</a>
             <a href="/rate" class="py-2 px-5 text-white rounded-full hover:bg-gray-700 text-xl">Point Rate</a>
+            @if (Auth::check())
+                <a href="/rate"
+                    class="justify-self-end py-2 px-5 text-white rounded-full hover:bg-gray-700 text-xl">Logout</a>
+            @else
+                <a href="/rate"
+                    class="justify-self-end py-2 px-5 text-white rounded-full hover:bg-gray-700 text-xl">Login</a>
+            @endif
+
         </div>
     </div>
     <div class="container mx-auto min-h-screen">
