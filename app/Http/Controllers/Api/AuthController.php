@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\PointHistory;
 use App\Models\User;
+use App\Http\Controllers\UploadController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -19,7 +20,7 @@ class AuthController extends Controller
     public function __construct()
     {
         $this->middleware('auth:api', [
-            'except' => ['login', 'register']
+            'except' => ['login', 'register', 'uploadProfile']
         ]);
     }
 
@@ -138,6 +139,31 @@ class AuthController extends Controller
             'token_type' => 'bearer',
             'expires_in' => config('jwt.ttl') * 60,
             'user' => auth()->user()
+        ]);
+    }
+
+    public function uploadProfile(Request $req) {
+
+        $validator = Validator::make($req->all(), [
+            'id' => 'required',
+            'selectedImage' => 'required|mimes:jpg,jpeg,png'
+        ]);
+
+        if ($validator->fails()) {
+
+            return response()->json(["status" => 'fail',"error" => $validator->errors()], 400);
+        }
+
+        $upload = new UploadController();
+        $upload_res = $upload->upload($req);
+        $user_id = $req->input('id');
+        $user = User::findOrFail($user_id);
+        $user->image = $upload_res->getData()->data;
+        $user->save();
+
+        return response()->json([
+            'status' => 'success',
+            'path' => $upload_res->getData()->data,
         ]);
     }
 }
