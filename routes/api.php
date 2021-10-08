@@ -32,8 +32,8 @@ Route::get('pointHistories/use', [\App\Http\Controllers\Api\PointHistoryControll
 Route::get('pointHistories/get', [\App\Http\Controllers\Api\PointHistoryController::class, 'get_index']);
 Route::apiResource('pointHistories', \App\Http\Controllers\Api\PointHistoryController::class);
 
-
 Route::post('/upload', [\App\Http\Controllers\UploadController::class, 'upload'])->name('upload');
+
 Route::group([
 
     'middleware' => 'api',
@@ -47,6 +47,7 @@ Route::group([
     Route::post('register', [AuthController::class, 'register']);
     Route::post('me', [AuthController::class, 'me']);
     Route::put('getPoint/{id}', [AuthController::class, 'getPoint']);
+    Route::post('uploadProfile', [AuthController::class, 'uploadProfile']);
 });
 Route::get('pointRate/last', [\App\Http\Controllers\Api\PointRateController::class, 'lastRate'])->name('rate.last');
 Route::apiResource('pointRates', \App\Http\Controllers\Api\PointRateController::class);
