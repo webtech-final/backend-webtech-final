@@ -51,6 +51,10 @@ Route::apiResource('pointRates',\App\Http\Controllers\Api\PointRateController::c
 
 Route::get('items/block/inventory/{id}', [\App\Http\Controllers\Api\ItemController::class, 'inventory_block']);
 Route::get('items/background/inventory/{id}', [\App\Http\Controllers\Api\ItemController::class, 'inventory_background']);
+Route::get('items/block/equipped/{id}', [\App\Http\Controllers\Api\ItemController::class, 'equipped_block']);
+Route::get('items/background/equipped/{id}', [\App\Http\Controllers\Api\ItemController::class, 'equipped_background']);
+Route::put('items/equip/{id}', [\App\Http\Controllers\Api\ItemController::class, 'equip_item']);
 Route::get('items/block/shop/{id}', [\App\Http\Controllers\Api\ItemController::class, 'shop_block']);
 Route::get('items/background/shop/{id}', [\App\Http\Controllers\Api\ItemController::class, 'shop_background']);
+Route::put('items/buy/{id}', [\App\Http\Controllers\Api\ItemController::class, 'buy_item']);
 Route::apiResource('items', \App\Http\Controllers\Api\ItemController::class);

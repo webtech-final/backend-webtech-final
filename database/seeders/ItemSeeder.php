@@ -25,5 +25,11 @@ class ItemSeeder extends Seeder
         $item->type =  "background";
         $item->point =  0;
         $item->save();
+
+        $item = new Item();
+        $item->name =  "Classic";
+        $item->type =  "block";
+        $item->point =  100;
+        $item->save();
     }
 }
