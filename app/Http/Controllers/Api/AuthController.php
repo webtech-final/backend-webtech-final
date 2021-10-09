@@ -166,4 +166,22 @@ class AuthController extends Controller
             'path' => $upload_res->getData()->data,
         ]);
     }
+
+    public function updateName(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+            'new_name' => 'required|string|between:2,100'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        $user_id = $request->id;
+        $new_name = $request->new_name;
+        $user = User::findOrFail($user_id);
+        $user->name = $new_name;
+        $user->save();
+        return $user->name;
+    }
 }

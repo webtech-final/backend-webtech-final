@@ -48,6 +48,7 @@ Route::group([
     Route::post('me', [AuthController::class, 'me']);
     Route::put('getPoint/{id}', [AuthController::class, 'getPoint']);
     Route::post('uploadProfile', [AuthController::class, 'uploadProfile']);
+    Route::put('updateName', [AuthController::class, 'updateName']);
 });
 Route::get('pointRate/last', [\App\Http\Controllers\Api\PointRateController::class, 'lastRate'])->name('rate.last');
 Route::apiResource('pointRates', \App\Http\Controllers\Api\PointRateController::class);
