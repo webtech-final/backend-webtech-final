@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\PointRate;
+use App\Models\Image;
 use Illuminate\Http\Request;
 
-class PointRateController extends Controller
+class ImageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,6 +14,17 @@ class PointRateController extends Controller
      */
     public function index()
     {
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -28,18 +38,24 @@ class PointRateController extends Controller
         //
     }
 
-    public function lastRate()
-    {
-        $pointRate = PointRate::get()->last();
-        return $pointRate;
-    }
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\PointRate  $pointRate
+     * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function show(PointRate $pointRate)
+    public function show(Image $image)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Image  $image
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Image $image)
     {
         //
     }
@@ -48,10 +64,10 @@ class PointRateController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\PointRate  $pointRate
+     * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PointRate $pointRate)
+    public function update(Request $request, Image $image)
     {
         //
     }
@@ -59,10 +75,10 @@ class PointRateController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\PointRate  $pointRate
+     * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PointRate $pointRate)
+    public function destroy(Image $image)
     {
         //
     }

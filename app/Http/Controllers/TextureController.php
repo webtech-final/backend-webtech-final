@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Item;
+use App\Models\Texture;
 use Illuminate\Http\Request;
+use App\Http\Controllers\UploadController;
 
-class ItemController extends Controller
+class TextureController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +15,8 @@ class ItemController extends Controller
      */
     public function index()
     {
-        //
-        $item = Item::orderBy('id')->get();
-        return view('items.index', ['items' => $item]);
+        $texture = Texture::orderBy('id')->get();
+        return view('textures.index', ['textures' => $texture]);
     }
 
     /**
@@ -26,8 +26,7 @@ class ItemController extends Controller
      */
     public function create()
     {
-        //
-        return view('items.create');
+        return view('textures.create');
     }
 
     /**
@@ -38,27 +37,26 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $item = new Item();
-        $item->name = $request->input('name');
+        $texture = new Texture();
+        $texture->name = $request->input('name');
 
         // call upload API 
         $response = new UploadController();
         $response = $response->upload($request);
 
-        $item->uri = $response->getData()->data;
-        $item->save();
+        $texture->uri = $response->getData()->data;
+        $texture->save();
 
-        return redirect()->route('items.index');
+        return redirect()->route('textures.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Item  $item
+     * @param  \App\Models\Texture  $texture
      * @return \Illuminate\Http\Response
      */
-    public function show(Item $item)
+    public function show(Texture $texture)
     {
         //
     }
@@ -66,23 +64,23 @@ class ItemController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Item  $item
+     * @param  \App\Models\Texture  $texture
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $item = Item::findOrFail($id);
-        return view('items.edit', ['item' => $item]);
+        $texture = Texture::findOrFail($id);
+        return view('textures.edit', ['texture' => $texture]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Item  $item
+     * @param  \App\Models\Texture  $texture
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Item $item)
+    public function update(Request $request, Texture $texture)
     {
         //
     }
@@ -90,10 +88,10 @@ class ItemController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Item  $item
+     * @param  \App\Models\Texture  $texture
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Item $item)
+    public function destroy(Texture $texture)
     {
         //
     }
