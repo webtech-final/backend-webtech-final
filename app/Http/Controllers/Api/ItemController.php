@@ -19,56 +19,97 @@ class ItemController extends Controller
         $items = Item::get();
         return $items;
     }
-    
+
     public function inventory_block($id)
     {
-        $items = Item::whereHas('users', function ($q) use($id){
+        $items = Item::whereHas('users', function ($q) use ($id) {
             $q->where('user_id', $id);
-        })->where('type','block')->get();
+        })->where('type', 'block')->get();
         return $items;
     }
     public function inventory_background($id)
     {
-        
         $items = Item::whereHas('users', function ($q) use ($id) {
             $q->where('user_id', $id);
         })->where('type', 'background')->get();
         return $items;
     }
+
+    //get equipped block
+    public function equipped_block($id)
+    {
+        $item = Item::whereHas('users', function ($q) use ($id) {
+            $q->where('user_id', $id)->where('equipped', true);
+        })->where('type', 'block')->get();
+        return $item;
+    }
+    //get equipped background
+    public function equipped_background($id)
+    {
+        $item = Item::whereHas('users', function ($q) use ($id) {
+            $q->where('user_id', $id)->where('equipped', true);
+        })->where('type', 'background')->get();
+        return $item;
+    }
+    //change equipped item
+    public function equip_item(Request $request, $id)
+    {
+        $user = User::with('items')->find($id);
+        $user->items()->updateExistingPivot($request->input('equipped_id'), ['equipped' => false]);
+        $user->items()->updateExistingPivot($request->input('equip_id'), ['equipped' => true]);
+        $user->save();
+        $user = User::with('items')->find($id);
+        return $user;
+    }
+
+
     public function shop_block($id)
     {
-        
-        $items = Item::where('id', '>', 2)->where('type', 'block');
+
+        $items = Item::where('type', 'block')->get();
         $haveitems = Item::whereHas('users', function ($q) use ($id) {
             $q->where('user_id', $id);
-        })->where('type', 'block');
-        foreach($items as $key => $item){
-            foreach($haveitems as $haveitem){
-                if($item === $haveitem){
+        })->where('type', 'block')->get();
+
+        $key = 0;
+        foreach ($items as $item) {
+            foreach ($haveitems as $haveitem) {
+                if ($item == $haveitem) {
                     unset($items[$key]);
                 }
             }
+            $key++;
         }
-
         return $items;
     }
     public function shop_background($id)
     {
-        
-        $items = Item::where('id', '>', 2)->where('type', 'background');
+
+        $items = Item::where('type', 'background')->get();
         $haveitems = Item::whereHas('users', function ($q) use ($id) {
             $q->where('user_id', $id);
-        })->where('type', 'background');
-        foreach ($items as $key => $item) {
+        })->where('type', 'background')->get();
+        $key = 0;
+        foreach ($items as $item) {
             foreach ($haveitems as $haveitem) {
-                if ($item === $haveitem) {
+                if ($item == $haveitem) {
                     unset($items[$key]);
                 }
             }
+            $key++;
         }
         return $items;
     }
-   
+    public function buy_item(Request $request, $id)
+    {
+        $user = User::find($id);
+        $user->items()->attach($request->input('item_id'));
+        $user->save();
+        $user = User::with('items')->find($id);
+        return $user;
+    }
+
+
 
     /**
      * Store a newly created resource in storage.

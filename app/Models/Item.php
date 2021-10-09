@@ -11,7 +11,7 @@ class Item extends Model
     use HasFactory,SoftDeletes;
 
     public function users(){
-        return $this->belongsToMany(User::class,'item_user', 'item_id', 'user_id')->withTimestamps();
+        return $this->belongsToMany(User::class,'item_user')->withPivot('equipped')->withTimestamps();
 
     }
     public function itemDetails()

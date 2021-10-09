@@ -125,6 +125,14 @@ class AuthController extends Controller
         $user->save();
         return $user->point;
     }
+    public function usePoint(Request $request, $id)
+    {
+        $point = $request->point;
+        $user = User::findOrFail($id);
+        $user->point = $user->point - $point;
+        $user->save();
+        return $user->point;
+    }
     /**
      * Get the token array structure.
      *
