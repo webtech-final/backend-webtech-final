@@ -46,8 +46,10 @@ Route::group([
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::post('register', [AuthController::class, 'register']);
     Route::post('me', [AuthController::class, 'me']);
-    Route::put('getPoint/{id}', [AuthController::class, 'getPoint']);
+    Route::put('getPoint/{id}',[AuthController::class,'getPoint']);
+    Route::put('usePoint/{id}', [AuthController::class, 'usePoint']);
     Route::post('uploadProfile', [AuthController::class, 'uploadProfile']);
+    Route::put('updateName', [AuthController::class, 'updateName']);
 });
 Route::get('pointRate/last', [\App\Http\Controllers\Api\PointRateController::class, 'lastRate'])->name('rate.last');
 Route::apiResource('pointRates', \App\Http\Controllers\Api\PointRateController::class);
@@ -56,6 +58,10 @@ Route::get('items/store', [\App\Http\Controllers\Api\ItemController::class, 'sho
 
 Route::get('items/block/inventory/{id}', [\App\Http\Controllers\Api\ItemController::class, 'inventory_block']);
 Route::get('items/background/inventory/{id}', [\App\Http\Controllers\Api\ItemController::class, 'inventory_background']);
+Route::get('items/block/equipped/{id}', [\App\Http\Controllers\Api\ItemController::class, 'equipped_block']);
+Route::get('items/background/equipped/{id}', [\App\Http\Controllers\Api\ItemController::class, 'equipped_background']);
+Route::put('items/equip/{id}', [\App\Http\Controllers\Api\ItemController::class, 'equip_item']);
 Route::get('items/block/shop/{id}', [\App\Http\Controllers\Api\ItemController::class, 'shop_block']);
 Route::get('items/background/shop/{id}', [\App\Http\Controllers\Api\ItemController::class, 'shop_background']);
+Route::put('items/buy/{id}', [\App\Http\Controllers\Api\ItemController::class, 'buy_item']);
 Route::apiResource('items', \App\Http\Controllers\Api\ItemController::class);
