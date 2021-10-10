@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+use App\Models\ItemDetail;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
@@ -12,11 +13,16 @@ class ItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         //
         $item = Item::orderBy('id')->get();
-        return view('items.index', ['items' => $item]);
+        $details = ItemDetail::get();
+        return view('items.index', ['items' => $item, 'details' => $details]);
     }
 
     /**
@@ -27,7 +33,8 @@ class ItemController extends Controller
     public function create()
     {
         //
-        return view('items.create');
+        $list = Item::pluck('type')->unique();
+        return view('items.create', ['list' => $list]);
     }
 
     /**
@@ -38,16 +45,24 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $item = new Item();
         $item->name = $request->input('name');
+        $item->type = $request->input('type');
+        $item->point = $request->input('point');
 
-        // call upload API 
-        $response = new UploadController();
-        $response = $response->upload($request);
-
-        $item->uri = $response->getData()->data;
         $item->save();
+        $myrequest = new UploadController();
+        if (count($request->file('selectedImage')) > 1) {
+            $response = $myrequest->uploadBlock($request, $item);
+        } else {
+            // call upload API 
+            $response = $myrequest->upload($request);
+            $detail = new ItemDetail();
+            $detail->item_id = $item->id;
+            $detail->name = $response->getData()->image_name;
+            $detail->image_path = $response->getData()->data;
+            $detail->save();
+        }
 
         return redirect()->route('items.index');
     }

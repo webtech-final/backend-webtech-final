@@ -33,7 +33,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         if (Auth::user()->role === 'admin') {
-            return redirect('/items');
+            return redirect('/');
         } else {
             Auth::logout();
             return redirect('/');

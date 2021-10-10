@@ -6,14 +6,21 @@
             item</a>
     </div>
 
-    <div class="grid grid-cols-3 gap-3 ">
+    <div class="grid grid-cols-3 gap-3 w-9/12 m-auto mt-14 bg-gradient-to-b from-indigo-300 to-gray-200 p-10">
         @foreach ($items as $item)
-            <div class="bg-gray-200 text-center py-2">
+            <div class="bg-gray-200 text-center py-2 flex flex-col">
                 {{ $item->name }}
-                <img src=" {{ $item->uri }} " alt="" />
+                <div class="flex  flex-wrap justify-center">
+                    @foreach ($details as $detail)
+                        @if ($detail->item_id === $item->id)
+                            <img src="{{ asset(Str::replace('public/', 'storage/', $detail->image_path)) }}"
+                                class="max-h-10 max-w-xs" alt="" />
+                        @endif
+                    @endforeach
+                </div>
                 <a href=" {{ route('items.edit', ['item' => $item->id]) }} "> Edit</a>
             </div>
         @endforeach
-
     </div>
+
 @endsection

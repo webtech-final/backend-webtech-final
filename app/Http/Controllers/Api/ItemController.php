@@ -19,17 +19,17 @@ class ItemController extends Controller
         $items = Item::get();
         return $items;
     }
-    
+
     public function inventory_block($id)
     {
-        $items = Item::whereHas('users', function ($q) use($id){
+        $items = Item::whereHas('users', function ($q) use ($id) {
             $q->where('user_id', $id);
-        })->where('type','block')->get();
+        })->where('type', 'block')->get();
         return $items;
     }
     public function inventory_background($id)
     {
-        
+
         $items = Item::whereHas('users', function ($q) use ($id) {
             $q->where('user_id', $id);
         })->where('type', 'background')->get();
@@ -37,14 +37,14 @@ class ItemController extends Controller
     }
     public function shop_block($id)
     {
-        
+
         $items = Item::where('id', '>', 2)->where('type', 'block');
         $haveitems = Item::whereHas('users', function ($q) use ($id) {
             $q->where('user_id', $id);
         })->where('type', 'block');
-        foreach($items as $key => $item){
-            foreach($haveitems as $haveitem){
-                if($item === $haveitem){
+        foreach ($items as $key => $item) {
+            foreach ($haveitems as $haveitem) {
+                if ($item === $haveitem) {
                     unset($items[$key]);
                 }
             }
@@ -54,7 +54,7 @@ class ItemController extends Controller
     }
     public function shop_background($id)
     {
-        
+
         $items = Item::where('id', '>', 2)->where('type', 'background');
         $haveitems = Item::whereHas('users', function ($q) use ($id) {
             $q->where('user_id', $id);
@@ -68,7 +68,7 @@ class ItemController extends Controller
         }
         return $items;
     }
-   
+
 
     /**
      * Store a newly created resource in storage.
@@ -83,6 +83,12 @@ class ItemController extends Controller
         $item->type = $request->input('type');
         $item->point = $request->input('point');
         $item->save();
+        return $item;
+    }
+
+    public function shop()
+    {
+        $item = Item::with('itemDetails')->get();
         return $item;
     }
 

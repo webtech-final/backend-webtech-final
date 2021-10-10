@@ -27,22 +27,10 @@ Route::resource('images', \App\Http\Controllers\ImageController::class);
 Route::get('/rate/change', [PointRateController::class, 'change'])->name('rate.change');
 Route::resource('rate', PointRateController::class);
 // Route::post('/upload', [\App\Http\Controllers\UploadController::class, 'upload'])->name('upload');
+Route::post('/uploadBlock', [\App\Http\Controllers\UploadController::class, 'uploadBlock'])->name('uploadBlock');
 
 Route::get('login', function () {
     return view('auth.login');
 })->name('login');
 
-// Route::group([
-
-//     'middleware' => 'web',
-//     'prefix' => 'auth'
-
-// ], function () {
-
-//     Route::post('login', [AuthController::class, 'login']);
-//     Route::post('logout', [AuthController::class, 'logout']);
-//     Route::post('refresh', [AuthController::class, 'refresh']);
-//     Route::post('register', [AuthController::class, 'register']);
-//     Route::post('me', [AuthController::class, 'me']);
-// });
 require __DIR__ . '/auth.php';
