@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ItemDetail extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
 
-    public function item(){
+    public function item()
+    {
         return $this->belongsTo(Item::class);
     }
 }

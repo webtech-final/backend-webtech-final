@@ -19,6 +19,17 @@
             <a href="/items" class="py-2 px-5 text-white rounded-full hover:bg-gray-700 text-xl">Item
                 Management</a>
             <a href="/rate" class="py-2 px-5 text-white rounded-full hover:bg-gray-700 text-xl">Point Rate</a>
+            @if (Auth::check())
+                <form action="{{ route('logout') }}" method="post" class="inline-block">
+                    @csrf
+                    <button class="justify-self-end py-2 px-5 text-white rounded-full hover:bg-gray-700 text-xl">Logout
+                    </button>
+                </form>
+            @else
+                <a href="{{ route('login') }}"
+                    class="justify-self-end py-2 px-5 text-white rounded-full hover:bg-gray-700 text-xl">Login</a>
+            @endif
+
         </div>
     </div>
     <div class="container mx-auto min-h-screen">

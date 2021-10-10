@@ -20,6 +20,7 @@ class CreateItemDetailsTable extends Migration
             $table->string('image_path');
             $table->timestamps();
             $table->foreign('item_id')->references('id')->on('items');
+            $table->softDeletes();
         });
     }
 

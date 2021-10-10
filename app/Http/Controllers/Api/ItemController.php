@@ -127,6 +127,12 @@ class ItemController extends Controller
         return $item;
     }
 
+    public function shop()
+    {
+        $item = Item::with('itemDetails')->get();
+        return $item;
+    }
+
     /**
      * Display the specified resource.
      *
