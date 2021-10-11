@@ -22,10 +22,6 @@ class AuthController extends Controller
         $this->middleware('auth:api', [
             'except' => ['login', 'register']
         ]);
-
-        $this->middleware('auth:web', [
-            'except' => ['login', 'register']
-        ]);
     }
 
     /**
@@ -94,8 +90,9 @@ class AuthController extends Controller
      */
     public function me(Request $request)
     {
-        // $user = JWTAuth::user()->pointHistories;
-        $user = JWTAuth::user()->with(['pointHistories', "playHistories"])->get();
+        $user = JWTAuth::user();
+        $user->pointHistories; 
+        $user->playHistories;
 
         return response()->json($user);
     }
@@ -168,7 +165,7 @@ class AuthController extends Controller
         }
 
         $upload = new UploadController();
-        $upload_res = $upload->upload($req);
+        $upload_res = $upload->uploadProfile($req);
         $user_id = $req->input('id');
         $user = User::findOrFail($user_id);
         $user->image = $upload_res->getData()->data;

@@ -14,6 +14,6 @@ class PointHistorySeeder extends Seeder
      */
     public function run()
     {
-        PointHistory::factory()->count(30)->create();
+        PointHistory::factory()->count(60)->create();
     }
 }
