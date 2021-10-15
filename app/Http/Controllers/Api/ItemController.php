@@ -16,7 +16,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $items = Item::get();
+        $items = Item::with('itemDetails')->get();
         return $items;
     }
 

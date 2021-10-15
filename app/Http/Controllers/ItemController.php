@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ItemRequest;
 use App\Models\Item;
 use App\Models\ItemDetail;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
@@ -20,9 +22,8 @@ class ItemController extends Controller
     public function index()
     {
         //
-        $item = Item::orderBy('id')->get();
-        $details = ItemDetail::get();
-        return view('items.index', ['items' => $item, 'details' => $details]);
+        $items = Item::orderBy('id')->with('itemDetails')->get();
+        return view('items.index', ['items' => $items,]);
     }
 
     /**
@@ -32,9 +33,25 @@ class ItemController extends Controller
      */
     public function create()
     {
-        //
-        $list = Item::pluck('type')->unique();
-        return view('items.create', ['list' => $list]);
+        return view('items.create');
+    }
+
+    public function createBackground()
+    {
+        return view('items.createBackground');
+    }
+
+    public function storeBackground(ItemRequest $request)
+    {
+        $validated = $request->validated();
+        ddd($validated);
+        if ($validated) {
+            ddd("success");
+        }
+        $item = new Item();
+        $item->name = $request->input('name');
+        $item->type = 'background';
+        $item->point = $request->input('point');
     }
 
     /**
@@ -43,27 +60,38 @@ class ItemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ItemRequest $request)
     {
+        // $validated = $request->validated();
+        // if (!$validated) {
+        // ddd("success", $validated['name']);
+        // }
         $item = new Item();
         $item->name = $request->input('name');
-        $item->type = $request->input('type');
+        $item->type = 'block';
         $item->point = $request->input('point');
+        $lists = [
+            'blockS',
+            'blockZ',
+            'blockL',
+            'blockJ',
+            'blockT',
+            'blockO',
+            'blockI'
+        ];
 
         $item->save();
-        $myrequest = new UploadController();
-        if (count($request->file('selectedImage')) > 1) {
-            $response = $myrequest->uploadBlock($request, $item);
-        } else {
-            // call upload API 
-            $response = $myrequest->upload($request);
+        // call upload API 
+        foreach ($lists as  $blockName) {
+            # code...
+            $myrequest = new UploadController();
+            $response = $myrequest->uploadBlock($request, $blockName);
             $detail = new ItemDetail();
             $detail->item_id = $item->id;
             $detail->name = $response->getData()->image_name;
             $detail->image_path = $response->getData()->data;
             $detail->save();
         }
-
         return redirect()->route('items.index');
     }
 
@@ -77,6 +105,17 @@ class ItemController extends Controller
     {
         //
     }
+    public function showBySlug($slug)
+    {
+        $items = Item::whereName($slug)->firstOrFail();
+        $items->itemDetails;
+        if (count($items->itemDetails) > 0) {
+            $itemDetail = $items->itemDetails[0];
+            // ddd($itemDetail->image_path, gettype($itemDetail));
+            return view('items.show', ['items' => $items, 'itemDetail' => $itemDetail]);
+        }
+        return view('items.show', ['items' => $items]);
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -86,8 +125,9 @@ class ItemController extends Controller
      */
     public function edit($id)
     {
-        $item = Item::findOrFail($id);
-        return view('items.edit', ['item' => $item]);
+        $items = Item::findOrFail($id);
+        $items->itemDetails;
+        return view('items.edit', ['items' => $items]);
     }
 
     /**
@@ -97,9 +137,17 @@ class ItemController extends Controller
      * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Item $item)
+    public function update(Request $request, $id)
     {
         //
+        foreach ($request->files as $key => $value) {
+            # code...
+            $upload = new UploadController();
+            $res = $upload->updateBlock($request, $key);
+        }
+        $items = Item::all();
+
+        return redirect()->route('items.index');
     }
 
     /**
@@ -108,8 +156,16 @@ class ItemController extends Controller
      * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Item $item)
+    public function destroy($id)
     {
-        //
+        $item = Item::findOrFail($id);
+        if ($item->id > 2) {
+            foreach ($item->itemDetails as $key => $value) {
+                # code...
+                $value->delete();
+            }
+            $item->delete();
+        }
+        return redirect()->route('items.index');
     }
 }

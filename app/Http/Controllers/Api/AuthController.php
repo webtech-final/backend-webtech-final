@@ -43,10 +43,6 @@ class AuthController extends Controller
         if (!$token = JWTAuth::attempt($validator->validated())) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-        $user = auth()->user();
-        if ($user->role === "admin") {
-            return redirect()->route('rate.index');
-        }
         return $this->respondWithToken($token);
     }
 
@@ -91,7 +87,7 @@ class AuthController extends Controller
     public function me(Request $request)
     {
         $user = JWTAuth::user();
-        $user->pointHistories; 
+        $user->pointHistories;
         $user->playHistories;
 
         return response()->json($user);
