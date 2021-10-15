@@ -24,14 +24,14 @@ class ItemController extends Controller
     {
         $items = Item::whereHas('users', function ($q) use ($id) {
             $q->where('user_id', $id);
-        })->where('type', 'block')->get();
+        })->where('type', 'block')->with('itemDetails')->get();
         return $items;
     }
     public function inventory_background($id)
     {
         $items = Item::whereHas('users', function ($q) use ($id) {
             $q->where('user_id', $id);
-        })->where('type', 'background')->get();
+        })->where('type', 'background')->with('itemDetails')->get();
         return $items;
     }
 
@@ -40,7 +40,7 @@ class ItemController extends Controller
     {
         $item = Item::whereHas('users', function ($q) use ($id) {
             $q->where('user_id', $id)->where('equipped', true);
-        })->where('type', 'block')->get();
+        })->where('type', 'block')->with('itemDetails')->get();
         return $item;
     }
     //get equipped background
@@ -48,7 +48,7 @@ class ItemController extends Controller
     {
         $item = Item::whereHas('users', function ($q) use ($id) {
             $q->where('user_id', $id)->where('equipped', true);
-        })->where('type', 'background')->get();
+        })->where('type', 'background')->with('itemDetails')->get();
         return $item;
     }
     //change equipped item
@@ -66,10 +66,10 @@ class ItemController extends Controller
     public function shop_block($id)
     {
 
-        $items = Item::where('type', 'block')->get();
+        $items = Item::where('type', 'block')->with('itemDetails')->get();
         $haveitems = Item::whereHas('users', function ($q) use ($id) {
             $q->where('user_id', $id);
-        })->where('type', 'block')->get();
+        })->where('type', 'block')->with('itemDetails')->get();
 
         $key = 0;
         foreach ($items as $item) {
@@ -85,10 +85,10 @@ class ItemController extends Controller
     public function shop_background($id)
     {
 
-        $items = Item::where('type', 'background')->get();
+        $items = Item::where('type', 'background')->with('itemDetails')->get();
         $haveitems = Item::whereHas('users', function ($q) use ($id) {
             $q->where('user_id', $id);
-        })->where('type', 'background')->get();
+        })->where('type', 'background')->with('itemDetails')->get();
         $key = 0;
         foreach ($items as $item) {
             foreach ($haveitems as $haveitem) {
@@ -98,6 +98,7 @@ class ItemController extends Controller
             }
             $key++;
         }
+        
         return $items;
     }
     public function buy_item(Request $request, $id)
