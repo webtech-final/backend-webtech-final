@@ -4,12 +4,42 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ItemDetail;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class UploadController extends Controller
 {
+
+    public function updateBlock(Request $request, $blockName)
+    {
+
+        $request->validate(
+            [
+                'image_file.*' => 'required|mimes:jpg,jpeg,png,bmp|max:20000'
+            ],
+            [
+                'image_file.*.required' => 'Please upload an image',
+                'image_file.*.mimes' => 'Only jpeg,png and bmp images are allowed',
+                'image_file.*.max' => 'Sorry! Maximum allowed size for an image is 20MB',
+            ]
+        );
+        $service_image = $request->file($blockName);
+        $img_ext = strtolower($service_image->getClientOriginalExtension());    // ดึงนามสกุลไฟล์ภาพ
+        $img_name = $blockName . "." . $img_ext;
+        // Storage::delete([$blockName]);
+        // ddd("DEBUG");
+        $full_path = $service_image->storeAs('public/' . $request->input('name'), $img_name);
+        $full_path = Str::replace('public', 'storage', $full_path);
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $full_path,
+            'image_name' => $blockName,
+        ], 200);
+    }
+
     // REF : https://youtu.be/DIdjdcJyvSg
-    public function upload(Request $request)
+    public function uploadBlock(Request $request, $blockName)
     {
         $request->validate(
             [
@@ -21,17 +51,16 @@ class UploadController extends Controller
                 'image_file.*.max' => 'Sorry! Maximum allowed size for an image is 20MB',
             ]
         );
-
-
-        $service_image = $request->file('selectedImage')[0];
+        $service_image = $request->file($blockName);
         $img_ext = strtolower($service_image->getClientOriginalExtension());    // ดึงนามสกุลไฟล์ภาพ
-        $img_name = $request->input('name') . "." . $img_ext;
+        $img_name = $blockName . "." . $img_ext;
         $full_path = $service_image->storeAs('public/' . $request->input('name'), $img_name);
+        $full_path = Str::replace('public', 'storage', $full_path);
 
         return response()->json([
             'status' => 'success',
             'data' => $full_path,
-            'image_name' => $img_name,
+            'image_name' => $blockName,
         ], 200);
     }
 
@@ -45,26 +74,19 @@ class UploadController extends Controller
                 'selectedImage.required' => "กรุณาใส่รูปภาพ"
             ]
         );
+
         $service_image = $request->file('selectedImage');
-
-        $name_gen = date("YmdHis");                                             // Generate ชื่อภาพ
         $img_ext = strtolower($service_image->getClientOriginalExtension());    // ดึงนามสกุลไฟล์ภาพ
-        $img_name = $name_gen . "." . $img_ext;
-
-        $upload_location = 'images/';
-        $full_path = $upload_location . $img_name;
-        $service_image->move($upload_location, $img_name);
+        $img_name = "profile-" . $request->input('id') . "." . $img_ext;
+        $full_path = $service_image->storeAs('public/profile', $img_name);
+        $full_path = Str::replace('public', 'storage', $full_path);
         return response()->json([
             'status' => '200',
             'data' => $full_path,
         ]);
-        // return redirect()->route('')->with('success', json_encode([
-        //     'success' => '200',
-        //     'image path' => $full_path
-        // ]));
     }
 
-    public function uploadBlock(Request $request, $item)
+    public function uploadBlock2(Request $request, $item)
     {
         $request->validate(
             [

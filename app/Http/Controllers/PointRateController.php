@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PointHistory;
 use App\Models\PointRate;
 use Illuminate\Http\Request;
 use Illuminate\Queue\RedisQueue;
@@ -24,8 +25,9 @@ class PointRateController extends Controller
     {
         $rate = PointRate::orderByDesc('created_at')->limit(10)->get();
         $last = PointRate::orderBy('id')->get()->last();
+        $pointlog = PointHistory::orderByDesc('created_at')->where('type', 'get')->with('user')->limit(10)->get();
 
-        return view('rates.index', ['rate' => $rate, 'last' => $last]);
+        return view('rates.index', ['rate' => $rate, 'last' => $last, 'pointLog' => $pointlog]);
     }
 
     /**

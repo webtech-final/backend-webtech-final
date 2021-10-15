@@ -14,12 +14,10 @@
     <!-- nav -->
     <div class="py-4 px-10 bg-gray-800 space-x-2 flex justify-between items-center">
         <div>
-            <a href="/" class="py-2 px-5 text-white rounded-full hover:bg-gray-700 text-xl
-             ">Home</a>
-            <a href="/items" class="py-2 px-5 text-white rounded-full hover:bg-gray-700 text-xl">Item
-                Management</a>
-            <a href="/rate" class="py-2 px-5 text-white rounded-full hover:bg-gray-700 text-xl">Point Rate</a>
             @if (Auth::check())
+                <a href="/items" class="py-2 px-5 text-white rounded-full hover:bg-gray-700 text-xl">Item
+                    Management</a>
+                <a href="/rate" class="py-2 px-5 text-white rounded-full hover:bg-gray-700 text-xl">Point Rate</a>
                 <form action="{{ route('logout') }}" method="post" class="inline-block">
                     @csrf
                     <button class="justify-self-end py-2 px-5 text-white rounded-full hover:bg-gray-700 text-xl">Logout
@@ -34,6 +32,7 @@
     </div>
     <div class="container mx-auto min-h-screen">
         @yield('content')
+        @yield('javascript')
     </div>
     <div class="bg-gray-800 h-10"></div>
 </body>

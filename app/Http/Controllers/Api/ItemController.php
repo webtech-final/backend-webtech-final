@@ -16,7 +16,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $items = Item::get();
+        $items = Item::with('itemDetails')->get();
         return $items;
     }
 
@@ -69,7 +69,7 @@ class ItemController extends Controller
         $items = Item::where('type', 'block')->get();
         $haveitems = Item::whereHas('users', function ($q) use ($id) {
             $q->where('user_id', $id);
-        })->where('type', 'block')->get();
+        })->where('type', 'block')->with('itemDetails')->get();
 
         $key = 0;
         foreach ($items as $item) {
