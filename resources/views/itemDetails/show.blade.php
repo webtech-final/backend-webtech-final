@@ -53,16 +53,20 @@
                 {{ $items->point }}
             </span>
         </div>
-        <div class="grid grid-cols-2 mt-6 ">
-            <a class="ml-10" onclick="return confirm('คุณต้องการที่จะลบไอเท็มชิ้นนี้หรือไม่')"
-                href="{{ route('items.destroy', $items->id) }}">
-                <button
-                    class="inline  bg-red-500 font-semibold text-2xl border-2 px-6 py-2 rounded-full hover:bg-red-300 hover:shadow-xl  ">Delete</button>
-            </a>
-            <a href="{{ route('items.edit', ['item' => $items]) }}" class="justify-self-end mr-10 -mb-4">
-                <button
-                    class="inline  bg-green-400 font-semibold text-2xl border-2 px-6 py-2 rounded-full hover:bg-green-200 hover:shadow-xl  ">Edit</button>
-            </a>
-        </div>
+        @if ($item->id > 2)
+
+            <div class="grid grid-cols-2 mt-6 ">
+                <form action="{{ route('items.destroy', $items->id) }}" method="POST">
+                    @method('DELETE')
+                    @csrf
+                    <button onclick="return confirm('คุณต้องการที่จะลบไอเท็มชิ้นนี้หรือไม่')"
+                        class="inline  bg-red-500 font-semibold text-2xl border-2 px-6 py-2 rounded-full hover:bg-red-300 hover:shadow-xl  ">Delete</button>
+                </form>
+                <a href="{{ route('items.edit', ['item' => $items]) }}" class="justify-self-end mr-10 -mb-4">
+                    <button type="submit"
+                        class="inline  bg-green-400 font-semibold text-2xl border-2 px-6 py-2 rounded-full hover:bg-green-200 hover:shadow-xl  ">Edit</button>
+                </a>
+            </div>
+        @endif
     </div>
 @endsection

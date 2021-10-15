@@ -158,9 +158,14 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-        //
         $item = Item::findOrFail($id);
-        $item->delete();
+        if ($item->id > 2) {
+            foreach ($item->itemDetails as $key => $value) {
+                # code...
+                $value->delete();
+            }
+            $item->delete();
+        }
         return redirect()->route('items.index');
     }
 }

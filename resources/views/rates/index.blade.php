@@ -14,7 +14,7 @@
         </div>
         <div>
             <a href=" {{ route('rate.change', ['rate' => $last->id]) }} "
-                class="bg-green-400 text-xl px-4 py-2 font-semibold rounded  hover:bg-green-200 mx-2">Test Rate
+                class="bg-green-400 text-xl px-4 py-2 font-semibold rounded  hover:bg-green-200 mx-2">Change Rate
             </a>
         </div>
     </div>
