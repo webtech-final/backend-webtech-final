@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Item;
+use App\Models\ItemDetail;
 use Illuminate\Http\Request;
 
 class ItemDetailController extends Controller
@@ -45,6 +47,11 @@ class ItemDetailController extends Controller
     public function show($id)
     {
         //
+        // $items->itemDetails;
+        $itemDetail = ItemDetail::findOrFail($id);
+        $items = Item::findOrFail($itemDetail->item->id);
+        $items->itemDetails;
+        return view('itemDetails.show', ['itemDetail' => $itemDetail, 'items' => $items]);
     }
 
     /**
