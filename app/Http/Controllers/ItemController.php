@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BackgroundRequest;
 use App\Http\Requests\ItemRequest;
 use App\Models\Item;
 use App\Models\ItemDetail;
@@ -21,9 +22,11 @@ class ItemController extends Controller
     }
     public function index()
     {
-        //
-        $items = Item::orderBy('id')->with('itemDetails')->get();
-        return view('items.index', ['items' => $items,]);
+        // get block
+        $items = Item::orderBy('id')->where('type', 'block')->with('itemDetails')->get();
+        // get background
+        $bg = Item::orderBy('id')->where('type', 'background')->with('itemDetails')->get();
+        return view('items.index', ['items' => $items, 'bg' => $bg]);
     }
 
     /**
@@ -41,17 +44,24 @@ class ItemController extends Controller
         return view('items.createBackground');
     }
 
-    public function storeBackground(ItemRequest $request)
+    public function storeBackground(BackgroundRequest $request)
     {
         $validated = $request->validated();
-        ddd($validated);
-        if ($validated) {
-            ddd("success");
-        }
         $item = new Item();
         $item->name = $request->input('name');
         $item->type = 'background';
-        $item->point = $request->input('point');
+        $item->point = $request->input('price');
+        $item->save();
+        $myrequest = new UploadController();
+        $response = $myrequest->uploadBlock($request,  'backgroundImage');
+        $detail = new ItemDetail();
+        $detail->item_id = $item->id;
+        $detail->name = $response->getData()->image_name;
+        $detail->image_path = $response->getData()->data;
+        $detail->save();
+
+        session()->flash('message', $item->name . ' succesfully created');
+        return redirect()->route('items.index');
     }
 
     /**
@@ -62,10 +72,7 @@ class ItemController extends Controller
      */
     public function store(ItemRequest $request)
     {
-        // $validated = $request->validated();
-        // if (!$validated) {
-        // ddd("success", $validated['name']);
-        // }
+        $validated = $request->validated();
         $item = new Item();
         $item->name = $request->input('name');
         $item->type = 'block';
@@ -92,6 +99,7 @@ class ItemController extends Controller
             $detail->image_path = $response->getData()->data;
             $detail->save();
         }
+        session()->flash('message', $item->name . ' succesfully created');
         return redirect()->route('items.index');
     }
 
@@ -105,9 +113,9 @@ class ItemController extends Controller
     {
         //
     }
-    public function showBySlug($slug)
+    public function showBySlug($type, $slug)
     {
-        $items = Item::whereName($slug)->firstOrFail();
+        $items = Item::whereName($slug)->where('type', $type)->firstOrFail();
         $items->itemDetails;
         if (count($items->itemDetails) > 0) {
             $itemDetail = $items->itemDetails[0];
@@ -160,11 +168,10 @@ class ItemController extends Controller
     {
         $item = Item::findOrFail($id);
         if ($item->id > 2) {
-            foreach ($item->itemDetails as $key => $value) {
-                # code...
-                $value->delete();
-            }
+            $detail = ItemDetail::where('item_id', $id);
+            $detail->delete();
             $item->delete();
+            session()->flash('message', $item->name . ' succesfully deleted');
         }
         return redirect()->route('items.index');
     }

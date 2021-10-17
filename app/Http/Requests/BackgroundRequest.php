@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ItemRequest extends FormRequest
+class BackgroundRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,29 +24,23 @@ class ItemRequest extends FormRequest
     public function rules()
     {
         return [
-            //
-            'name' => ['required', 'unique:items,name,NULL,id,type,block,deleted_at,NULL'],
-            'point' => ['required', 'regex:/^[1-9]+[0-9]*/'],
-            'blockS' => ['required', 'mimes:jpg,jpeg,png', 'max:100'],
-            'blockZ' => ['required', 'mimes:jpg,jpeg,png', 'max:100'],
-            'blockL' => ['required', 'mimes:jpg,jpeg,png', 'max:100'],
-            'blockJ' => ['required', 'mimes:jpg,jpeg,png', 'max:100'],
-            'blockT' => ['required', 'mimes:jpg,jpeg,png', 'max:100'],
-            'blockO' => ['required', 'mimes:jpg,jpeg,png', 'max:100'],
-            'blockI' => ['required', 'mimes:jpg,jpeg,png', 'max:100'],
-            // 'backgroundImage' => ['required', 'mimes:jpg,jpeg,png', 'max:2000']
+            'backgroundImage' => 'required|mimes:jpg,jpeg,png|max:2000',
+            'name' => ['required', 'unique:items,name,NULL,id,type,background,deleted_at,NULL'],
+            'price' => ['required', 'regex:/^[1-9]+[0-9]*/'],
         ];
     }
     public function messages()
     {
         return [
+
             'required' => 'กรุณาใส่รูปภาพ',
             'mimes' => 'นามสกุลไฟล์ jpg, jpeg, png',
             'max' => 'ไฟล์ขนาดไม่เกิน :max kilobytes',
             'name.required' => 'กรุณาระบุชื่อไอเท็ม',
-            'point.required' => 'กรุณาระบุจำนวนแต้มที่ต้องการเพื่อใช้แลกไอเท็ม',
+            'price.required' => 'กรุณาระบุจำนวนแต้มที่ต้องการเพื่อใช้แลกไอเท็ม',
             'name.unique' => 'ชื่อไอเท็มนี้ถูกใช้ไปแล้ว',
             'regex' => 'คะแนนที่ใช้แลกต้องเป็นจำนวนเต็มบวก ex. 1, 2, 10, 20 '
+
         ];
     }
 }

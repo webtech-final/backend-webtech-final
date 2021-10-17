@@ -28,7 +28,7 @@ Route::prefix('items')->group(function () {
 });
 Route::get('items/createBackground', [ItemController::class, 'createBackground'])->name('items.createBackground');
 Route::post('items/storeBackground', [ItemController::class, 'storeBackground'])->name('items.storeBackground');
-Route::get('item/{slug}', [ItemController::class, 'showBySlug'])->name('items.slug');
+Route::get('item/{type}/{slug}', [ItemController::class, 'showBySlug'])->name('items.slug');
 Route::resource('items', \App\Http\Controllers\ItemController::class);
 Route::get('/rate/change', [PointRateController::class, 'change'])->name('rate.change');
 Route::resource('rate', PointRateController::class);
