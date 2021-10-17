@@ -6,7 +6,7 @@
             PREVIEW
         </h1>
     </div>
-    @if (count($items->itemDetails))
+    @if (count($items->itemDetails) > 1)
 
         <div class=" w-1/6 mx-auto my-10">
             <div>
@@ -26,6 +26,10 @@
                     </a>
                 @endif
             @endforeach
+        </div>
+    @else
+        <div class=" w-1/6 mx-auto my-10">
+            <img src="{{ asset($itemDetail->image_path) }}" alt="" class="">
         </div>
     @endif
     <div class=" bg-gray-200 w-1/2  mx-auto py-8 rounded-lg shadow-lg border-gray-400 border">
@@ -53,10 +57,10 @@
                 {{ $items->point }}
             </span>
         </div>
-        @if ($item->id > 2)
+        @if ($items->id > 2)
 
             <div class="grid grid-cols-2 mt-6 ">
-                <form action="{{ route('items.destroy', $items->id) }}" method="POST">
+                <form action="{{ route('items.destroy', $items->id) }}" method="POST" class="ml-10">
                     @method('DELETE')
                     @csrf
                     <button onclick="return confirm('คุณต้องการที่จะลบไอเท็มชิ้นนี้หรือไม่')"

@@ -10,7 +10,8 @@
                 @csrf
                 <div class="space-y-2">
                     <label for="name" id="lbName" class="text-2xl font-mono text-white">Name</label>
-                    <input class="w-full text-xl block rounded-lg " type="text" name="name" placeholder="name" placeholder="name">
+                    <input class="w-full text-xl block rounded-lg " type="text" name="name" placeholder="name"
+                        autocomplete="off" placeholder="name">
                 </div>
                 @error('name')
                     <div>
@@ -19,7 +20,8 @@
                 @enderror
                 <div class="space-y-2 mt-3 w-full">
                     <label for="Point" class="text-2xl font-mono text-white">Price</label>
-                    <input type="text" class="w-full text-xl block rounded-lg " name="point" placeholder="point">
+                    <input type="text" class="w-full text-xl block rounded-lg " name="price" autocomplete="off"
+                        placeholder="point">
                 </div>
                 @error('price')
                     <div>
@@ -28,16 +30,16 @@
                 @enderror
                 <div class="space-y-2 mt-3">
                     <label for="image" class="text-2xl font-mono text-white">Background Image</label>
-                    <input type="file" name="backgroundImage" class="w-full text-xl bg-white w-full">
+                    <input type="file" name="backgroundImage" class="w-full text-xl bg-white">
                 </div>
                 @error('backgroundImage')
                     <div>
                         <span class="text-red-600">{{ $message }}</span>
                     </div>
                 @enderror
-                <div class="mt-10">
+                <div class="mt-10 flex w-full justify-end">
                     <button type="submit"
-                        class="w-full bg-green-400 font-mono text-2xl px-6 py-2 rounded-full hover:bg-green-500 hover:shadow-xl">Add</button>
+                        class="py-2 px-6 rounded-xl text-3xl font-mono bg-blue-700 hover:bg-blue-800 shadow-md hover:shadow-lg text-gray-200">Add</button>
                 </div>
             </form>
         </div>

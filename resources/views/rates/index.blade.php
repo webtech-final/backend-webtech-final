@@ -23,7 +23,7 @@
         <div class="p-5 mt-10 w-3/6 m-auto grid grid-cols-1 ">
             <h1 class="text-center text-3xl mb-4 border-b-2 border-indigo-400 mx-8 pb-3 font-sans font-semibold"> Point Rate
                 History</h1>
-            <table class="text-lg text-center text-gray-900 bg-gray-300 uppercase border-b border-gray-600">
+            <table class="text-lg text-center text-gray-900 bg-gray-300 uppercase border-b border-gray-600 shadow-lg">
                 <th class="px-3 py-3">index</th>
                 <th class="px-3 py-3">point rate</th>
                 <th class="px-10 py-3">set at</th>
@@ -45,14 +45,14 @@
         <div class="p-5 mt-10 w-4/6 m-auto grid grid-cols-1">
             <h1 class="text-center text-3xl mb-4 border-b-2 border-indigo-400 mx-8 pb-3 font-sans font-semibold"> Received
                 Point History</h1>
-            <table class="text-lg text-center text-gray-900 bg-gray-300 uppercase border-b border-gray-600">
+            <table class="text-lg text-center text-gray-900 bg-gray-300 uppercase border border-gray-600 shadow-lg">
                 <th class="px-3 py-3">index</th>
                 <th class="px-3 py-3">Player Name</th>
                 <th class="px-10 py-3">Point Amount <br /> (received)</th>
                 <th class="px-10 py-3">get at</th>
                 @foreach ($pointLog as $i)
-                    <tr class="hover:bg-gray-200">
-                        <td class="px-4 py-3 border">
+                    <tr class="hover:bg-gray-200 ">
+                        <td class="px-4 py-3 border border-gray-600">
                             {{ $loop->index + 1 }}
                         </td>
                         <td class="px-4 py-3 border">
