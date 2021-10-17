@@ -33,6 +33,12 @@ DB_USERNAME= {your database username }
 DB_PASSWORD= {your database password }
 ```
 
+### 4. if you don't use http://localhost:8000/ at your host, change this valuable (last line)
+
+```bash
+MIX_LARAVEL_END_POINT="http://localhost:8000/"
+```
+
 ## 5. Generate app key
 
 ```bash
@@ -40,9 +46,9 @@ php artisan key:generate
 php artisan jwt:secret
 ```
 
-## 5.1 Create database with same name as 'DB_DATABASE' in .env
+### 5.1 Create database with same name as 'DB_DATABASE' in .env
 
-## 5.2 Create symbolic link from storage/app/public/ to public/storage/
+### 5.2 Create symbolic link from storage/app/public/ to public/storage/
 
 ```bash
 php artisan storage:link
