@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BackgroundEditRequest;
 use App\Http\Requests\BackgroundRequest;
+use App\Http\Requests\ItemEditRequest;
 use App\Http\Requests\ItemRequest;
 use App\Models\Item;
 use App\Models\ItemDetail;
@@ -136,7 +138,10 @@ class ItemController extends Controller
     {
         $items = Item::findOrFail($id);
         $items->itemDetails;
-        return view('items.edit', ['items' => $items]);
+        if ($items->type === 'block') {
+            return view('items.edit', ['items' => $items]);
+        }
+        return view('items.editBackground', ['items' => $items]);
     }
 
     /**
@@ -146,9 +151,34 @@ class ItemController extends Controller
      * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateBackground(BackgroundEditRequest $request, $id)
     {
         //
+        $validated = $request->validated();
+        $item = Item::findOrFail($id);
+        $item->name = $request->input('name');
+        $item->save();
+        foreach ($request->files as $key => $value) {
+            # code...
+            $upload = new UploadController();
+            $res = $upload->uploadBlock($request, $key, $id);
+            foreach ($item->itemDetails as $k => $v) {
+                # code...
+                if ($v->name === $key) {
+                    $v->image_path = $res->getData()->data;
+                    $v->save();
+                    break;
+                }
+            }
+        }
+        session()->flash('message', $item->name . ' succesfully updated');
+        return redirect()->route('items.index');
+    }
+    public function update(ItemEditRequest $request, $id)
+    {
+        //
+        ddd("DEBUGxj");
+        $validated = $request->validated();
         $item = Item::findOrFail($id);
         $item->name = $request->input('name');
         $item->save();

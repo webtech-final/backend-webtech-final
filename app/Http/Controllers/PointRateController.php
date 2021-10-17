@@ -75,6 +75,7 @@ class PointRateController extends Controller
     public function change()
     {
         $last = PointRate::orderBy('id')->get()->last();
+        session()->flash('message',  'point rate succesfully changed');
         return view('rates.change', ['last' => $last]);
     }
     public function edit($id)

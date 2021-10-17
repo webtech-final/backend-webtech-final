@@ -22,11 +22,11 @@ Route::get('/', function () {
     return redirect()->route('items.index');
 });
 Route::prefix('items')->group(function () {
-
     Route::resource('details', ItemDetailController::class);
 });
 Route::get('items/createBackground', [ItemController::class, 'createBackground'])->name('items.createBackground');
 Route::post('items/storeBackground', [ItemController::class, 'storeBackground'])->name('items.storeBackground');
+Route::put('item/updatebg/{item}', [ItemController::class, 'updateBackground'])->name('items.updatebg');
 Route::get('item/{type}/{slug}', [ItemController::class, 'showBySlug'])->name('items.slug');
 Route::resource('items', \App\Http\Controllers\ItemController::class);
 Route::get('/rate/change', [PointRateController::class, 'change'])->name('rate.change');
