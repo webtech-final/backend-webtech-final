@@ -33,7 +33,8 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         if (Auth::user()->role === 'admin') {
-            return redirect('/');
+            // session()->flash('message', "Signed in successfully");
+            return redirect()->route('items.index')->with('status', 'Signed in successfully');
         } else {
             Auth::logout();
             return redirect('/');

@@ -19,7 +19,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $items = Item::orderBy('id')->with('itemDetails')->get();
     return redirect()->route('items.index');
 });
 Route::prefix('items')->group(function () {

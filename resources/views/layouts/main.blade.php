@@ -9,6 +9,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/logo.png">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <script src="{{ asset('css/app.css') }}"></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.8.2/dist/alpine.min.js"></script>
 </head>
 
 <body class="bg-gray-100 space-y-5">

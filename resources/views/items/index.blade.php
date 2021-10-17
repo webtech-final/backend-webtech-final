@@ -2,7 +2,8 @@
 
 @section('content')
     @if (session()->exists('message'))
-        <div class="bg-green-200 border border-green-500 rounded-lg py-4 px-6 text-green-900">
+        <div x-data="{show: true}" x-init="setTimeout(() => show = false, 3000)" x-show="show"
+            class="bg-green-200 border border-green-500 text-xl rounded-lg py-4 px-6 text-green-900">
             {{ session('message') }}
         </div>
     @endif
@@ -31,11 +32,10 @@
                         <p>
                             {{ $item->name }}
                         </p>
-                        <div class="flex justify-between px-6 my-3">
+                        <div class="flex justify-around px-6 my-3">
                             <button href="{{ route('items.slug', ['slug' => $item->name, 'type' => $item->type]) }}"
                                 class="bg-blue-600 rounded-md ring ring-indigo-300 text-gray-100 hover:bg-blue-200 hover:shadow-lg hover:text-gray-900 w-1/3">Detail</button>
                             @if ($item->id > 2)
-
                                 <form action="{{ route('items.destroy', $item->id) }}" method="POST" class="">
                                     @method('DELETE')
                                     @csrf
@@ -66,24 +66,35 @@
                     <div class="bg-gray-200 text-center py-2 flex flex-col rounded-md">
                         <div class="flex  flex-wrap justify-center">
                             @if (count($item->itemDetails) > 0)
-                                <img src="{{ asset($item->itemDetails[0]->image_path) }}" class="max-h-10 max-w-xs" alt="" />
+                                <img src="{{ asset($item->itemDetails[0]->image_path) }}" class="max-h-24 max-w-2xl" alt="" />
                             @endif
                         </div>
                         {{ $item->name }}
-                        <div class="flex justify-between px-6 my-3">
+                        <div class="flex justify-around px-6 my-3">
                             <button href="{{ route('items.edit', ['item' => $item->id, 'type' => $item->type]) }}"
-                                class="bg-blue-600 rounded-md ring ring-indigo-300 text-gray-100 hover:bg-blue-200 hover:shadow-lg hover:text-gray-900 w-1/3">EDIT</button>
-                            <form action="{{ route('items.destroy', $item->id) }}" method="POST" class="">
-                                @method('DELETE')
-                                @csrf
-                                <button onclick="return confirm('คุณต้องการที่จะลบไอเท็มชิ้นนี้หรือไม่')"
-                                    class="bg-red-600 rounded-md ring ring-red-300 text-gray-100 hover:bg-red-200 hover:shadow-lg hover:text-gray-900 px-4 ">Delete</button>
-                            </form>
+                                class="bg-blue-600 rounded-md ring ring-indigo-300 text-gray-100 hover:bg-blue-200 hover:shadow-lg hover:text-gray-900 w-1/3">DETAIL</button>
+                            @if ($item->id > 2)
+                                <form action="{{ route('items.destroy', $item->id) }}" method="POST" class="">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button onclick="return confirm('คุณต้องการที่จะลบไอเท็มชิ้นนี้หรือไม่')"
+                                        class="bg-red-600 rounded-md ring ring-red-300 text-gray-100 hover:bg-red-200 hover:shadow-lg hover:text-gray-900 px-4 ">Delete</button>
+                                </form>
+                            @endif
                         </div>
                     </div>
                 </a>
             @endforeach
         @endisset
     </div>
+
+    @if (session('status'))
+        <div x-data="{show: true}" x-init="setTimeout(() => show = false, 4000)" x-show="show" x-tran
+            class="bg-green-200 animate-bounce transition ease-out duration-300 border border-green-500 text-xl rounded-lg py-4 px-6 text-green-900 fixed bottom-4 right-4 flex ">
+            <span class="">
+                {{ session('status') }}
+            </span>
+        </div>
+    @endif
 
 @endsection
