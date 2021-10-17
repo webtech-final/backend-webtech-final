@@ -40,7 +40,13 @@ php artisan key:generate
 php artisan jwt:secret
 ```
 
-## 5.5 Create database with same name as DB_DATABASE in .env
+## 5.1 Create database with same name as 'DB_DATABASE' in .env
+
+## 5.2 Create symbolic link from storage/app/public/ to public/storage/
+
+```bash
+php artisan storage:link
+```
 
 ## 6. Migrate table and seed record
 
