@@ -39,7 +39,7 @@ class UploadController extends Controller
     }
 
     // REF : https://youtu.be/DIdjdcJyvSg
-    public function uploadBlock(Request $request, $blockName)
+    public function uploadBlock(Request $request, $blockName, $id)
     {
         $request->validate(
             [
@@ -54,7 +54,7 @@ class UploadController extends Controller
         $service_image = $request->file($blockName);
         $img_ext = strtolower($service_image->getClientOriginalExtension());    // ดึงนามสกุลไฟล์ภาพ
         $img_name = $blockName . "." . $img_ext;
-        $full_path = $service_image->storeAs('public/' . $request->input('name'), $img_name);
+        $full_path = $service_image->storeAs('public/' . $id, $img_name);
         $full_path = Str::replace('public', 'storage', $full_path);
 
         return response()->json([

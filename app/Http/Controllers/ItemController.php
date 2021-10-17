@@ -8,6 +8,7 @@ use App\Models\Item;
 use App\Models\ItemDetail;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
+use Symfony\Component\Console\Input\Input;
 
 class ItemController extends Controller
 {
@@ -53,7 +54,7 @@ class ItemController extends Controller
         $item->point = $request->input('price');
         $item->save();
         $myrequest = new UploadController();
-        $response = $myrequest->uploadBlock($request,  'backgroundImage');
+        $response = $myrequest->uploadBlock($request,  'backgroundImage', $item->id);
         $detail = new ItemDetail();
         $detail->item_id = $item->id;
         $detail->name = $response->getData()->image_name;
@@ -92,7 +93,7 @@ class ItemController extends Controller
         foreach ($lists as  $blockName) {
             # code...
             $myrequest = new UploadController();
-            $response = $myrequest->uploadBlock($request, $blockName);
+            $response = $myrequest->uploadBlock($request, $blockName, $item->id);
             $detail = new ItemDetail();
             $detail->item_id = $item->id;
             $detail->name = $response->getData()->image_name;
@@ -148,13 +149,23 @@ class ItemController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $item = Item::findOrFail($id);
+        $item->name = $request->input('name');
+        $item->save();
         foreach ($request->files as $key => $value) {
             # code...
             $upload = new UploadController();
-            $res = $upload->updateBlock($request, $key);
+            $res = $upload->uploadBlock($request, $key, $id);
+            foreach ($item->itemDetails as $k => $v) {
+                # code...
+                if ($v->name === $key) {
+                    $v->image_path = $res->getData()->data;
+                    $v->save();
+                    break;
+                }
+            }
         }
-        $items = Item::all();
-
+        session()->flash('message', $item->name . ' succesfully updated');
         return redirect()->route('items.index');
     }
 
