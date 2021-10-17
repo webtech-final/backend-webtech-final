@@ -5,37 +5,42 @@
         <div class="text-6xl font-serif text-center">
             Edit Block Texture
         </div>
-        <form action="{{ route('items.update', ['item' => $items->id]) }} " method="post" enctype="multipart/form-data"
+        <form action="{{ route('items.updatebg', ['item' => $items->id]) }} " method="post" enctype="multipart/form-data"
             class="grid grid-cols-1 place-items-center w-full mx-auto">
             @csrf
             @method('PUT')
             <div class="w-full mt-5">
-                <label for="name" class="text-xl">Name</label>
+                <label for="name">Name</label>
                 <input type="text" name="name" placeholder="name" autocomplete="off"
-                    class="w-full text-xl border-2 text-black shadow-md hover:shadow-lg"
+                    class="w-full text-xl border-2 shadow-md hover:shadow-lg text-black"
                     value="{{ old('name', $items->name) }} ">
+
             </div>
-            <div class="place-items-start w-full mt-3">
-                <label for="name" class="text-xl">Price</label>
-                <input type="text" name="price" placeholder="price" autocomplete="off"
-                    class="w-full text-xl border-2 shadow-md text-black hover:shadow-lg"
+            @error('name')
+                <div>
+                    <span class="text-red-600">{{ $message }}</span>
+                </div>
+            @enderror
+            <div class="w-full mt-5">
+                <label for="name">Price</label>
+                <input type="text" name="price" placeholder="price"
+                    class="w-full text-xl text-black border-2 shadow-md hover:shadow-lg" autocomplete="off"
                     value="{{ old('price', $items->point) }} ">
+
             </div>
             @error('price')
                 <div>
                     <span class="text-red-600">{{ $message }}</span>
                 </div>
             @enderror
-
             @isset($items->itemDetails)
                 @foreach ($items->itemDetails as $item)
                     <div class="grid-cols-1 grid space-y-4  mt-6 w-full">
                         <img id="{{ $item->name . 'img' }}" src="{{ asset($item->image_path) }} " alt=""
                             class="max-h-36 max-w-4xl">
-                        <label for="blockS" class="text-xl">{{ Str::of($item->name)->upper() }}</label>
-                        <input type="file" name="{{ $item->name }}" class="block text-xl  border-2 shadow-md hover:shadow-lg"
-                            onchange="showImg(this, {{ $item->name }})">
-
+                        <label class="text-xl" for="blockS">{{ Str::of($item->name)->upper }}</label>
+                        <input type="file" name="{{ $item->name }}" onchange="showImg(this, {{ $item->name }})"
+                            class="w-full text-xl border-2 shadow-md hover:shadow-lg">
                     </div>
                     @error($item->name)
                         <div>
@@ -46,7 +51,7 @@
             @endisset
             <div class="mt-16 justify-self-end">
                 <button type="submit"
-                    class=" bg-blue-600 font-semibold text-2xl border-2 px-6 py-2 rounded-full ring ring-indigo-300 text-gray-100 hover:bg-blue-200 hover:shadow-lg hover:text-gray-900  ">
+                    class="bg-blue-600 font-semibold text-2xl border-2 px-6 py-2 rounded-full ring ring-indigo-300 text-gray-100 hover:bg-blue-200 hover:shadow-lg hover:text-gray-900  ">
                     Submit</button>
             </div>
         </form>

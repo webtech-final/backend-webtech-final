@@ -1,7 +1,12 @@
 @extends('layouts.main')
 
 @section('content')
-
+    @if (session()->exists('message'))
+        <div x-data="{show: true}" x-init="setTimeout(() => show = false, 3000)" x-show="show"
+            class="bg-green-200 border border-green-500 text-xl rounded-lg py-4 px-6 text-green-900">
+            {{ session('message') }}
+        </div>
+    @endif
     <div>
         <h2 class="text-6xl text-center font-serif font-semibold m-4">Current Rate</h2>
     </div>
@@ -21,21 +26,22 @@
 
     <div class="flex space-x-2">
         <div class="p-5 mt-10 w-3/6 m-auto grid grid-cols-1 ">
-            <h1 class="text-center text-3xl mb-4 border-b-2 border-indigo-400 mx-8 pb-3 font-sans font-semibold"> Point Rate
+            <h1 class="text-center text-3xl mb-4 border-b-2 border-indigo-400 mx-8 pb-3 font-sans font-semibold"> Point
+                Rate
                 History</h1>
-            <table class="text-lg text-center text-gray-900 bg-gray-300 uppercase border-b border-gray-600 shadow-lg">
+            <table class="text-lg text-center text-gray-900 bg-gray-300 uppercase border border-gray-600 shadow-lg">
                 <th class="px-3 py-3">index</th>
                 <th class="px-3 py-3">point rate</th>
                 <th class="px-10 py-3">set at</th>
                 @foreach ($rate as $item)
                     <tr class="hover:bg-gray-200">
-                        <td class="px-4 py-3 border">
+                        <td class="px-4 py-3 border border-gray-600">
                             {{ $loop->index + 1 }}
                         </td>
-                        <td class="px-4 py-3 border">
+                        <td class="px-4 py-3 border border-gray-600">
                             {{ $item->rate }}
                         </td>
-                        <td class="px-4 py-3 border">
+                        <td class="px-4 py-3 border border-gray-600">
                             {{ $item->created_at->format('d-M-y H:i:s a') }}
                         </td>
                     </tr>
@@ -43,7 +49,8 @@
             </table>
         </div>
         <div class="p-5 mt-10 w-4/6 m-auto grid grid-cols-1">
-            <h1 class="text-center text-3xl mb-4 border-b-2 border-indigo-400 mx-8 pb-3 font-sans font-semibold"> Received
+            <h1 class="text-center text-3xl mb-4 border-b-2 border-indigo-400 mx-8 pb-3 font-sans font-semibold">
+                Received
                 Point History</h1>
             <table class="text-lg text-center text-gray-900 bg-gray-300 uppercase border border-gray-600 shadow-lg">
                 <th class="px-3 py-3">index</th>
@@ -52,16 +59,16 @@
                 <th class="px-10 py-3">get at</th>
                 @foreach ($pointLog as $i)
                     <tr class="hover:bg-gray-200 ">
-                        <td class="px-4 py-3 border border-gray-600">
+                        <td class="px-4 py-3  border border-gray-600">
                             {{ $loop->index + 1 }}
                         </td>
-                        <td class="px-4 py-3 border">
+                        <td class="px-4 py-3 border border-gray-600">
                             {{ $i->user->name }}
                         </td>
-                        <td class="px-4 py-3 border">
+                        <td class="px-4 py-3 border-gray-600 border">
                             {{ $i->point }}
                         </td>
-                        <td class="px-4 py-3 border">
+                        <td class="px-4 py-3 border border-gray-600">
                             {{ $item->created_at->format('d-M-y H:i:s a') }}
                         </td>
                     </tr>
