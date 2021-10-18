@@ -40,7 +40,7 @@
                 @enderror
                 <div class="mt-10 flex w-full justify-end">
                     <button type="submit"
-                        class="py-2 px-6 rounded-xl text-3xl font-mono bg-blue-700 hover:bg-blue-800 shadow-md hover:shadow-lg text-gray-200">Add</button>
+                        class="bg-blue-600 font-semibold text-2xl border-2 px-6 py-2 rounded-full  text-gray-100 hover:bg-blue-200 hover:shadow-lg hover:text-gray-900">Add</button>
                 </div>
             </form>
         </div>

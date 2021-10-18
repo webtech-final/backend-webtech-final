@@ -24,6 +24,7 @@ class BackgroundEditRequest extends FormRequest
     public function rules()
     {
         return [
+            'name' => ['required'],
             'backgroundImage' => 'mimes:jpg,jpeg,png|max:2000',
             'price' => ['required', 'regex:/^[1-9]+[0-9]*/'],
         ];
@@ -31,6 +32,7 @@ class BackgroundEditRequest extends FormRequest
     public function messages()
     {
         return [
+            'name.required' => 'กรุณาระบุชื่อไอเท็ม',
             'mimes' => 'นามสกุลไฟล์ jpg, jpeg, png',
             'max' => 'ไฟล์ขนาดไม่เกิน :max kilobytes',
             'price.required' => 'กรุณาระบุจำนวนแต้มที่ต้องการเพื่อใช้แลกไอเท็ม',

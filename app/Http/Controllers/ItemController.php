@@ -157,6 +157,7 @@ class ItemController extends Controller
         $validated = $request->validated();
         $item = Item::findOrFail($id);
         $item->name = $request->input('name');
+        $item->point = $request->input('price');
         $item->save();
         foreach ($request->files as $key => $value) {
             # code...
@@ -177,10 +178,10 @@ class ItemController extends Controller
     public function update(ItemEditRequest $request, $id)
     {
         //
-        ddd("DEBUGxj");
         $validated = $request->validated();
         $item = Item::findOrFail($id);
         $item->name = $request->input('name');
+        $item->point = $request->input('price');
         $item->save();
         foreach ($request->files as $key => $value) {
             # code...

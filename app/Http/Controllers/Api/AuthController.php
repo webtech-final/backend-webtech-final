@@ -152,12 +152,14 @@ class AuthController extends Controller
 
         $validator = Validator::make($req->all(), [
             'id' => 'required',
-            'selectedImage' => 'required|mimes:jpg,jpeg,png'
+            'selectedImage' => 'required|mimes:jpg,jpeg,png|max:1024'
+        ], [
+            'max' => 'รองรับภาพขนาดไม่เกิน :max kilobyte'
         ]);
 
         if ($validator->fails()) {
 
-            return response()->json(["status" => 'fail', "error" => $validator->errors()], 400);
+            return response()->json(["status" => 'fail', "error" => $validator->errors()->all()], 400);
         }
 
         $upload = new UploadController();
@@ -173,7 +175,8 @@ class AuthController extends Controller
         ]);
     }
 
-    public function updateName(Request $request) {
+    public function updateName(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'id' => 'required',
             'new_name' => 'required|string|between:2,100'

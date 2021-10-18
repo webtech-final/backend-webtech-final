@@ -10,9 +10,9 @@
             class="grid grid-cols-1 place-items-center w-full mx-auto">
             @csrf
             <div class="w-full mt-5">
-                <label for="name" id="lbName" class="text-2xl font-mono text-white">Name</label>
-                <input autocomplete="off" class="w-full text-xl border-2 shadow-md hover:shadow-lg" type="text" name="name"
-                    placeholder="name">
+                <label for="name" id="lbName" class="text-2xl font-mono ">Name</label>
+                <input autocomplete="off" class="w-full text-xl border-2 shadow-md hover:shadow-lg text-black" type="text"
+                    name="name" placeholder="name">
             </div>
             @error('name')
                 <div>
@@ -20,9 +20,9 @@
                 </div>
             @enderror
             <div class="place-items-start w-full mt-3">
-                <label for="Point" class="text-2xl font-mono text-white">Price</label>
-                <input autocomplete="off" type="text" class="w-full text-xl border-2 shadow-md hover:shadow-lg" name="point"
-                    placeholder="point">
+                <label for="Point" class="text-2xl font-mono ">Price</label>
+                <input autocomplete="off" type="text" class="w-full text-xl border-2 shadow-md hover:shadow-lg text-black"
+                    name="point" placeholder="point">
             </div>
             @error('point')
                 <div>
@@ -30,7 +30,7 @@
                 </div>
             @enderror
             <div class="text-left w-full">
-                <h1 class="text-4xl font-serif text-white mt-4">Image </h1>
+                <h1 class="text-4xl font-mono text-white mt-4">Image Checkout</h1>
             </div>
             <div class="mt-3 w-full">
                 <img id="blockS" src="" alt="" class="max-h-36 max-w-4xl">
@@ -111,7 +111,7 @@
             @enderror
             <div class="mt-10 flex w-full justify-end">
                 <button
-                    class="py-2 px-6 rounded-xl text-3xl font-mono bg-blue-700 hover:bg-blue-800 shadow-md hover:shadow-lg text-gray-200"
+                    class="bg-blue-600 font-semibold text-2xl border-2 px-6 py-2 rounded-full  text-gray-100 hover:bg-blue-200 hover:shadow-lg hover:text-gray-900"
                     type="submit">ADD</button>
             </div>
         </form>

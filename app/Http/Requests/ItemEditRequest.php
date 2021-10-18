@@ -25,6 +25,7 @@ class ItemEditRequest extends FormRequest
     {
         return [
             //
+            'name' => ['required'],
             'price' => ['required', 'regex:/^[1-9]+[0-9]*/'],
             'blockS' => ['mimes:jpg,jpeg,png', 'max:100'],
             'blockZ' => ['mimes:jpg,jpeg,png', 'max:100'],
@@ -38,6 +39,7 @@ class ItemEditRequest extends FormRequest
     public function messages()
     {
         return [
+            'name.required' => 'กรุณาระบุชื่อไอเท็ม',
             'mimes' => 'นามสกุลไฟล์ jpg, jpeg, png',
             'max' => 'ไฟล์ขนาดไม่เกิน :max kilobytes',
             'point.required' => 'กรุณาระบุจำนวนแต้มที่ต้องการเพื่อใช้แลกไอเท็ม',

@@ -6,7 +6,7 @@
             Edit Block Texture
         </div>
         <form action="{{ route('items.update', ['item' => $items->id]) }} " method="post" enctype="multipart/form-data"
-            class="grid grid-cols-1 place-items-center w-full mx-auto">
+            class=" w-full mx-auto py-6 px-8 mt-10">
             @csrf
             @method('PUT')
             <div class="w-full mt-5">
@@ -15,6 +15,11 @@
                     class="w-full text-xl border-2 text-black shadow-md hover:shadow-lg"
                     value="{{ old('name', $items->name) }} ">
             </div>
+            @error('name')
+                <div class="text-left">
+                    <span class="text-red-600">{{ $message }}</span>
+                </div>
+            @enderror
             <div class="place-items-start w-full mt-3">
                 <label for="name" class="text-xl">Price</label>
                 <input type="text" name="price" placeholder="price" autocomplete="off"
@@ -27,12 +32,16 @@
                 </div>
             @enderror
 
+            <div class="text-left w-full">
+                <h1 class="text-4xl font-mono text-white mt-4">Image Section </h1>
+            </div>
             @isset($items->itemDetails)
                 @foreach ($items->itemDetails as $item)
                     <div class="grid-cols-1 grid space-y-4  mt-6 w-full">
                         <img id="{{ $item->name . 'img' }}" src="{{ asset($item->image_path) }} " alt=""
                             class="max-h-36 max-w-4xl">
-                        <label for="blockS" class="text-xl">{{ Str::of($item->name)->upper() }}</label>
+                        <label for="blockS"
+                            class="text-2xl font-mono">{{ 'Texture for ' . Str::of($item->name)->upper() }}</label>
                         <input type="file" name="{{ $item->name }}" class="block text-xl  border-2 shadow-md hover:shadow-lg"
                             onchange="showImg(this)">
 
@@ -44,9 +53,9 @@
                     @enderror
                 @endforeach
             @endisset
-            <div class="mt-16 justify-self-end">
+            <div class="mt-16 flex w-full justify-end">
                 <button type="submit"
-                    class=" bg-blue-600 font-semibold text-2xl border-2 px-6 py-2 rounded-full ring ring-indigo-300 text-gray-100 hover:bg-blue-200 hover:shadow-lg hover:text-gray-900  ">
+                    class=" bg-blue-600 font-semibold text-2xl border-2 px-6 py-2 rounded-full  text-gray-100 hover:bg-blue-200 hover:shadow-lg hover:text-gray-900  ">
                     Submit</button>
             </div>
         </form>
