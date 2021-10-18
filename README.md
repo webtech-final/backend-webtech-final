@@ -5,7 +5,7 @@ git clone https://github.com/webtech-final/backend-webtech-final.git
 ```
 
 ```bash
-cd web-laravel101
+cd backend-webtech-final
 ```
 
 ## 2. Install package
