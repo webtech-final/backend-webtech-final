@@ -5,7 +5,7 @@ git clone https://github.com/webtech-final/backend-webtech-final.git
 ```
 
 ```bash
-cd web-laravel101
+cd backend-webtech-final
 ```
 
 ## 2. Install package
@@ -33,7 +33,7 @@ DB_USERNAME= {your database username }
 DB_PASSWORD= {your database password }
 ```
 
-### 4. if you don't use http://localhost:8000/ at your host, change this valuable (last line)
+### 4.1 if you are not using http://localhost:8000/ at your host url, change this valuable (last line)
 
 ```bash
 MIX_LARAVEL_END_POINT="http://localhost:8000/"
