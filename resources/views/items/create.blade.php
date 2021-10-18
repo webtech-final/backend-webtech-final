@@ -7,7 +7,7 @@
         </div>
 
         <form action="{{ route('items.store') }} " method="POST" enctype="multipart/form-data"
-            class="grid grid-cols-1 place-items-center w-full mx-auto">
+            class="grid grid-cols-1  w-full mx-auto">
             @csrf
             <div class="w-full mt-5">
                 <label for="name" id="lbName" class="text-2xl font-mono ">Name</label>
@@ -30,7 +30,7 @@
                 </div>
             @enderror
             <div class="text-left w-full">
-                <h1 class="text-4xl font-mono text-white mt-4">Image Checkout</h1>
+                <h1 class="text-4xl font-mono text-white mt-4">Image Section</h1>
             </div>
             <div class="mt-3 w-full">
                 <img id="blockS" src="" alt="" class="max-h-36 max-w-4xl">
