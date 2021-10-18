@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -37,6 +38,7 @@ class AuthenticatedSessionController extends Controller
             return redirect()->route('items.index')->with('status', 'Signed in successfully');
         } else {
             Auth::logout();
+            throw ValidationException::withMessages(['error' =>  __('auth.failed')]);
             return redirect('/');
         }
     }

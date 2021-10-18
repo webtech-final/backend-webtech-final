@@ -1,6 +1,7 @@
 @extends('layouts.main')
 @section('content')
     <x-guest-layout>
+
         <x-auth-card>
             <x-slot name="logo">
                 <a href="/">
@@ -51,6 +52,7 @@
             </form>
         </x-auth-card>
     </x-guest-layout>
+
     @if (session('status'))
         <div x-data="{show: true}" x-init="setTimeout(() => show = false, 4000)" x-show="show" x-tran
             class="bg-green-200 animate-bounce transition ease-out duration-300 border border-green-500 text-xl rounded-lg py-4 px-6 text-green-900 fixed bottom-4 right-4 flex ">
