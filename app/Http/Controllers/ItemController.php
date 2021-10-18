@@ -64,7 +64,7 @@ class ItemController extends Controller
         $detail->image_path = $response->getData()->data;
         $detail->save();
 
-        session()->flash('message', $item->name . ' succesfully created');
+        session()->flash('message', $item->name . ' successfully created');
         return redirect()->route('items.index');
     }
 
@@ -103,7 +103,7 @@ class ItemController extends Controller
             $detail->image_path = $response->getData()->data;
             $detail->save();
         }
-        session()->flash('message', $item->name . ' succesfully created');
+        session()->flash('message', $item->name . ' successfully created');
         return redirect()->route('items.index');
     }
 
@@ -173,7 +173,7 @@ class ItemController extends Controller
                 }
             }
         }
-        session()->flash('message', $item->name . ' succesfully updated');
+        session()->flash('message', $item->name . ' successfully updated');
         return redirect()->route('items.index');
     }
     public function update(ItemEditRequest $request, $id)
@@ -197,7 +197,7 @@ class ItemController extends Controller
                 }
             }
         }
-        session()->flash('message', $item->name . ' succesfully updated');
+        session()->flash('message', $item->name . ' successfully updated');
         return redirect()->route('items.index');
     }
 
@@ -231,7 +231,7 @@ class ItemController extends Controller
             $detail = ItemDetail::where('item_id', $id);
             $detail->delete();
             $item->delete();
-            session()->flash('message', $item->name . ' succesfully deleted');
+            session()->flash('message', $item->name . ' successfully deleted');
         }
         return redirect()->route('items.index');
     }
