@@ -14,6 +14,6 @@ class PlayHistorySeeder extends Seeder
      */
     public function run()
     {
-        PlayHistory::factory()->count(50)->create();
+        // PlayHistory::factory()->count(50)->create();
     }
 }

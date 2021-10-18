@@ -14,6 +14,9 @@ class PointRateSeeder extends Seeder
      */
     public function run()
     {
-        PointRate::factory()->count(10)->create();
+        $newRate = new PointRate;
+        $newRate->rate = 100;
+        $newRate->save();
+        // PointRate::factory()->count(10)->create();
     }
 }
