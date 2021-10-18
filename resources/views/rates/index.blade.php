@@ -1,10 +1,10 @@
 @extends('layouts.main')
 
 @section('content')
-    @if (session()->exists('message'))
+    @if (session()->exists('ratestatus'))
         <div x-data="{show: true}" x-init="setTimeout(() => show = false, 3000)" x-show="show"
             class="bg-green-200 border border-green-500 text-xl rounded-lg py-4 px-6 text-green-900">
-            {{ session('message') }}
+            {{ session('ratestatus') }}
         </div>
     @endif
     <div>
