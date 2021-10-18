@@ -8,6 +8,7 @@ use App\Http\Requests\ItemEditRequest;
 use App\Http\Requests\ItemRequest;
 use App\Models\Item;
 use App\Models\ItemDetail;
+use App\Models\User;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use Symfony\Component\Console\Input\Input;
@@ -209,7 +210,24 @@ class ItemController extends Controller
     public function destroy($id)
     {
         $item = Item::findOrFail($id);
+
         if ($item->id > 2) {
+
+            $users = User::whereHas('items', function ($q) use ($id) {
+                $q->where('item_id', $id)->where('equipped', true);
+            })->get();
+            $t = 0;
+            if ($item->type === 'block') {
+                $t = 1;
+            } else {
+                $t = 2;
+            }
+            foreach ($users as $user) {
+                $user->items()->updateExistingPivot($t, ['equipped' => true]);
+            }
+
+
+            $item->users()->detach();
             $detail = ItemDetail::where('item_id', $id);
             $detail->delete();
             $item->delete();
