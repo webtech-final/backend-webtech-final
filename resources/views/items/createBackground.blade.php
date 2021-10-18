@@ -29,8 +29,9 @@
                     </div>
                 @enderror
                 <div class="space-y-2 mt-3">
+                    <img id="backgroundImage" src="" alt="" class="max-h-36 max-w-4xl mt-3">
                     <label for="image" class="text-2xl font-mono text-white">Background Image</label>
-                    <input type="file" name="backgroundImage" class="w-full text-xl bg-white">
+                    <input type="file" name="backgroundImage" class="w-full text-xl bg-white" onchange="showImg(this)">
                 </div>
                 @error('backgroundImage')
                     <div>
@@ -44,4 +45,15 @@
             </form>
         </div>
     </div>
+
+    <script>
+        function showImg(event) {
+            var img = document.getElementById(event.name);
+            if (event.files[0]) {
+                img.src = URL.createObjectURL(event.files[0]);
+            } else {
+                img.src = ""
+            }
+        }
+    </script>
 @endsection

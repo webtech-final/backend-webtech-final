@@ -34,7 +34,7 @@
                             class="max-h-36 max-w-4xl">
                         <label for="blockS" class="text-xl">{{ Str::of($item->name)->upper() }}</label>
                         <input type="file" name="{{ $item->name }}" class="block text-xl  border-2 shadow-md hover:shadow-lg"
-                            onchange="showImg(this, {{ $item->name }})">
+                            onchange="showImg(this)">
 
                     </div>
                     @error($item->name)

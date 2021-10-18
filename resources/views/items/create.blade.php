@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('content')
 
-    <div class="mt-10 bg-gray-900 mx-64 p-24 rounded-xl">
+    <div class="mt-10 bg-gray-900 mx-64 p-24 rounded-xl text-white">
         <div class="text-6xl font-serif text-center text-white">
             Add New Block
         </div>
@@ -33,9 +33,10 @@
                 <h1 class="text-4xl font-serif text-white mt-4">Image </h1>
             </div>
             <div class="mt-3 w-full">
+                <img id="blockS" src="" alt="" class="max-h-36 max-w-4xl">
                 <label for="image" class="text-2xl font-mono text-white">Texture for Block S</label>
-                <input type="file" name="blockS" class="w-full text-xl bg-white border-2 shadow-md hover:shadow-lg"
-                    value="{{ old('blockS') }}">
+                <input type="file" name="blockS" class="w-full text-xl  border-2 shadow-md hover:shadow-lg"
+                    onchange="showImg(this)" value="{{ old('blockS') }}">
             </div>
             @error('blockS')
                 <div>
@@ -43,9 +44,10 @@
                 </div>
             @enderror
             <div class="mt-3 w-full">
+                <img id="blockZ" src="" alt="" class="max-h-36 max-w-4xl">
                 <label for="image" class="text-2xl font-mono text-white">Texture for Block Z</label>
-                <input type="file" name="blockZ" class="w-full text-xl bg-white border-2 shadow-md hover:shadow-lg"
-                    value="{{ old('blockZ') }}">
+                <input type="file" name="blockZ" class="w-full text-xl border-2 shadow-md hover:shadow-lg"
+                    onchange="showImg(this)" value="{{ old('blockZ') }}">
             </div>
             @error('blockZ')
                 <div>
@@ -53,9 +55,10 @@
                 </div>
             @enderror
             <div class="mt-3 w-full">
+                <img id="blockL" src="" alt="" class="max-h-36 max-w-4xl">
                 <label for="image" class="text-2xl font-mono text-white">Texture for Block L</label>
-                <input type="file" name="blockL" class="w-full text-xl bg-white border-2 shadow-md hover:shadow-lg"
-                    value="{{ old('blockL') }}">
+                <input type="file" name="blockL" class="w-full text-xl  border-2 shadow-md hover:shadow-lg"
+                    onchange="showImg(this)" value="{{ old('blockL') }}">
             </div>
             @error('blockL')
                 <div>
@@ -63,9 +66,10 @@
                 </div>
             @enderror
             <div class="mt-3 w-full">
+                <img id="blockJ" src="" alt="" class="max-h-36 max-w-4xl">
                 <label for="image" class="text-2xl font-mono text-white">Texture for Block J</label>
-                <input type="file" name="blockJ" class="w-full text-xl bg-white border-2 shadow-md hover:shadow-lg"
-                    value="{{ old('blockJ') }}">
+                <input type="file" name="blockJ" class="w-full text-xl  border-2 shadow-md hover:shadow-lg"
+                    onchange="showImg(this)" value="{{ old('blockJ') }}">
             </div>
             @error('blockJ')
                 <div>
@@ -73,9 +77,10 @@
                 </div>
             @enderror
             <div class="mt-3 w-full">
+                <img id="blockT" src="" alt="" class="max-h-36 max-w-4xl">
                 <label for="image" class="text-2xl font-mono text-white">Texture for Block T</label>
-                <input type="file" name="blockT" class="w-full text-xl bg-white border-2 shadow-md hover:shadow-lg"
-                    value="{{ old('blockT') }}">
+                <input type="file" name="blockT" class="w-full text-xl  border-2 shadow-md hover:shadow-lg"
+                    onchange="showImg(this)" value="{{ old('blockT') }}">
             </div>
             @error('blockT')
                 <div>
@@ -83,9 +88,10 @@
                 </div>
             @enderror
             <div class="mt-3 w-full">
+                <img id="blockO" src="" alt="" class="max-h-36 max-w-4xl">
                 <label for="image" class="text-2xl font-mono text-white">Texture for Block O</label>
-                <input type="file" name="blockO" class="w-full text-xl bg-white border-2 shadow-md hover:shadow-lg"
-                    value="{{ old('blockO') }}">
+                <input type="file" name="blockO" class="w-full text-xl  border-2 shadow-md hover:shadow-lg"
+                    onchange="showImg(this)" value="{{ old('blockO') }}">
             </div>
             @error('blockO')
                 <div>
@@ -93,9 +99,10 @@
                 </div>
             @enderror
             <div class="mt-3 w-full">
+                <img id="blockI" src="" alt="" class="max-h-36 max-w-4xl">
                 <label for="image" class="text-2xl font-mono text-white">Texture for Block I</label>
-                <input type="file" name="blockI" class="w-full text-xl bg-white border-2 shadow-md hover:shadow-lg"
-                    value="{{ old('blockI') }}">
+                <input type="file" name="blockI" class="w-full text-xl  border-2 shadow-md hover:shadow-lg"
+                    onchange="showImg(this)" value="{{ old('blockI') }}">
             </div>
             @error('blockI')
                 <div>
@@ -110,5 +117,17 @@
         </form>
 
     </div>
+    <script>
+        var APP_URL = '{{ env('MIX_LARAVEL_END_POINT') }}'
+
+        function showImg(event) {
+            var img = document.getElementById(event.name);
+            if (event.files[0]) {
+                img.src = URL.createObjectURL(event.files[0]);
+            } else {
+                img.src = ""
+            }
+        }
+    </script>
 
 @endsection
