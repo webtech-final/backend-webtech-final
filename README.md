@@ -47,6 +47,14 @@ php artisan jwt:secret
 ```
 
 ### 5.1 Create database with same name as 'DB_DATABASE' in .env
+```bash
+mysql -u {your DB username} -p
+```
+Enter {your DB password}
+```
+CREATE DATABASE {your DB name};
+exit
+```
 
 ### 5.2 Create symbolic link from storage/app/public/ to public/storage/
 
@@ -60,8 +68,19 @@ php artisan storage:link
 php artisan migrate --seed
 ```
 
-## 7. Complie
+## 7. RUN DEV SERVE
 
 ```bash
 php artisan serve
+```
+
+## NOTE
+!! if use "php artisan serve" game textrue will not load use nginx or apache to host api instead
+
+### Nginx config
+add this below to nginx config file
+```
+add_header Access-Control-Allow-Origin *;
+add_header Access-Control-Max-Age 3600;
+add_header Access-Control-Expose-Headers Content-Length;
 ```
