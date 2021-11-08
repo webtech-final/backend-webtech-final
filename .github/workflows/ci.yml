@@ -45,6 +45,9 @@ jobs:
           php artisan key:generate 
           php artisan jwt:secret
 
+      - name: Clear Config
+        run: php artisan config:clear
+
       - name: Directory Permissions
         run: chmod -R 777 storage bootstrap/cache
 
