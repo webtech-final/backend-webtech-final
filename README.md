@@ -1,3 +1,15 @@
+เว็บ TETRIS.vs
+
+เป็นเว็บเล่นเกม tetris ที่สามารถเล่นได้ทั้งแบบสมัครสมาชิกและไม่สมัครสมาชิกโดยมีการเล่นทั้งแบบคนเดียวและการเล่นแข่งขันกับเพื่อนโดยในโหมดการแข่งขันจะแข่งกันว่าใครอยู่รอดได้นานกว่ากันโดยไม่สนคะแนนที่ได้การจัดอันดับจะส่งผลก็ต่อเมื่อผู้เล่นสมัครสมาชิกเท่านั้น และสมาชิกยังสามารถสะสมแต้มเพื่อปลดล็อคบล็อคและพื้นหลังได้
+
+สมาชิกผู้จัดทำ
+
+1. นายณัฐเสฐ ธนบดี 6210402411
+2. นายภาณุภัทร ชูเลาตระกูล 6210402488
+3. นายโชติธนินท์ พิชญอรุณสิทธิ์ 6210406599
+4. นายลภัส สารคุณประดิษฐ์ 6210406653
+5. นายกฤษดา มังสระคู (จากรายวิชา WebTech)
+
 ## 1. Clone this repo and cd to project root dir
 
 ```bash
@@ -47,10 +59,13 @@ php artisan jwt:secret
 ```
 
 ### 5.1 Create database with same name as 'DB_DATABASE' in .env
+
 ```bash
 mysql -u {your DB username} -p
 ```
+
 Enter {your DB password}
+
 ```
 CREATE DATABASE {your DB name};
 exit
@@ -75,10 +90,13 @@ php artisan serve
 ```
 
 ## NOTE
+
 !! if use "php artisan serve" game textrue will not load use nginx or apache to host api instead
 
 ### Nginx config
+
 add this below to nginx config file
+
 ```
 add_header Access-Control-Allow-Origin *;
 add_header Access-Control-Max-Age 3600;
@@ -86,7 +104,9 @@ add_header Access-Control-Expose-Headers Content-Length;
 ```
 
 ### Testing config
+
 Add this to your .env file with text editer
+
 ```
 DB_TESTING_HOST=127.0.0.1
 DB_TESTING_PORT=3306
@@ -94,11 +114,15 @@ DB_TESTING_DATABASE= {your testing database name}
 DB_TESTING_USERNAME= {your testing database username}
 DB_TESTING_PASSWORD= {your testing database password}
 ```
+
 Create database with same name as 'DB_TESTING_DATABASE' in .env
+
 ```
 mysql -u {your testing DB username} -p
 ```
+
 Enter {your testing DB password}
+
 ```
 CREATE DATABASE {your testing DB name};
 grant all privileges on {your testing DB name} . * to '{your testing DB username}'@'localhost';
@@ -107,11 +131,13 @@ quit
 ```
 
 Migrate Testing Database
+
 ```
 php artisan migrate --database=mysql_testing --seed
 ```
 
 Run Test Command
+
 ```
 php artisan test --testsuite=Feature
 ```
