@@ -14,10 +14,14 @@ jobs:
       mysql:
         image: mysql:5.7
         env:
-          MYSQL_DATABASE: tetris_db_test
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          # MYSQL_ROOT_PASSWORD: "secret"
+          MYSQL_DATABASE: "tetris_db_test"
+          MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+          # MYSQL_USER: "homestead"
+          # MYSQL_PASSWORD: "secret"
         ports:
           - 3306/tcp
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
       - name: Checkout
