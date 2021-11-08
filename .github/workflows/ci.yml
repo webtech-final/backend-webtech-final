@@ -20,13 +20,12 @@ jobs:
           # MYSQL_USER: "homestead"
           # MYSQL_PASSWORD: "secret"
         ports:
-          - 3306/tcp
+          - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        run: mysql -h 127.0.0.1 --port 3306 -u root -e 'CREATE DATABASE IF NOT EXISTS tetris_db_test;'
 
       - name: Setup php
         uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
