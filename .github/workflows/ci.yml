@@ -20,7 +20,7 @@ jobs:
           # MYSQL_USER: "homestead"
           # MYSQL_PASSWORD: "secret"
         ports:
-          - 3306:3306
+          - 3306/tcp
 
     steps:
       - name: Checkout
