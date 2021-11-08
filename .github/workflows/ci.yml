@@ -15,7 +15,7 @@ jobs:
         image: mysql:5.7
         env:
           MYSQL_DATABASE: tetris_db_test
-          MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
         ports:
           - 3306/tcp
 
