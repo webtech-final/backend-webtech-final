@@ -84,3 +84,34 @@ add_header Access-Control-Allow-Origin *;
 add_header Access-Control-Max-Age 3600;
 add_header Access-Control-Expose-Headers Content-Length;
 ```
+
+### Testing config
+Add this to your .env file with text editer
+```
+DB_TESTING_HOST=127.0.0.1
+DB_TESTING_PORT=3306
+DB_TESTING_DATABASE= {your testing database name}
+DB_TESTING_USERNAME= {your testing database username}
+DB_TESTING_PASSWORD= {your testing database password}
+```
+Create database with same name as 'DB_TESTING_DATABASE' in .env
+```
+mysql -u {your testing DB username} -p
+```
+Enter {your testing DB password}
+```
+CREATE DATABASE {your testing DB name};
+grant all privileges on {your testing DB name} . * to '{your testing DB username}'@'localhost';
+flush privileges;
+quit
+```
+
+Migrate Testing Database
+```
+php artisan migrate --database=mysql_testing --seed
+```
+
+Run Test Command
+```
+php artisan test --testsuite=Feature
+```
